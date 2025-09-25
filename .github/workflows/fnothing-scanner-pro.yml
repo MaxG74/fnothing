@@ -11,6 +11,7 @@ permissions:
 jobs:
   scan:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,12 +23,28 @@ jobs:
         with:
           node-version: "20"
 
+      # Optionaler Debug-Step – zeigt nur, ob die Env vorhanden ist (true/false)
+      - name: Check env presence
+        run: |
+          node -e "console.log({
+            OPENAI: !!process.env.OPENAI_API_KEY,
+            ONE_APP: !!process.env.ONESIGNAL_APP_ID,
+            ONE_REST: !!process.env.ONESIGNAL_REST_KEY
+          })"
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
+          ONESIGNAL_REST_KEY: ${{ secrets.ONESIGNAL_REST_KEY || vars.ONESIGNAL_REST_KEY }}
+          ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID || vars.ONESIGNAL_APP_ID }}
+
       - name: Run scanner
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          ONESIGNAL_REST_KEY: ${{ secrets.ONESIGNAL_REST_KEY }}
-          ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID }}
-          SCORE_THRESHOLD: "72"        # kannst du anpassen
+          # Nimmt Secrets, fällt sonst auf Variables zurück
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
+          ONESIGNAL_REST_KEY: ${{ secrets.ONESIGNAL_REST_KEY || vars.ONESIGNAL_REST_KEY }}
+          ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID || vars.ONESIGNAL_APP_ID }}
+
+          # Feintuning (kannst du ändern)
+          SCORE_THRESHOLD: "72"
           QUIET_TZ: "Europe/Berlin"
           QUIET_START: "23"
           QUIET_END: "6"
