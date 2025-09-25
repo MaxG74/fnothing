@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: "20"
 
-      # Optionaler Debug-Step – zeigt nur, ob die Env vorhanden ist (true/false)
+      # Optional: zeigt nur, ob Env gesetzt ist (true/false)
       - name: Check env presence
         run: |
           node -e "console.log({
@@ -36,14 +36,15 @@ jobs:
           ONESIGNAL_REST_KEY: ${{ secrets.ONESIGNAL_REST_KEY || vars.ONESIGNAL_REST_KEY }}
           ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID || vars.ONESIGNAL_APP_ID }}
 
+      # <-- FIX: Ordner anlegen, falls nicht vorhanden
+      - name: Ensure reports dir
+        run: mkdir -p reports
+
       - name: Run scanner
         env:
-          # Nimmt Secrets, fällt sonst auf Variables zurück
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
           ONESIGNAL_REST_KEY: ${{ secrets.ONESIGNAL_REST_KEY || vars.ONESIGNAL_REST_KEY }}
           ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID || vars.ONESIGNAL_APP_ID }}
-
-          # Feintuning (kannst du ändern)
           SCORE_THRESHOLD: "72"
           QUIET_TZ: "Europe/Berlin"
           QUIET_START: "23"
