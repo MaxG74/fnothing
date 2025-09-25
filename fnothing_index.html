@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>fnothing Signals – Krypto- & Aktien-Signale</title>
+  <meta name="description" content="fnothing Signals liefert strukturierte Handels-Signale für Krypto, Aktien & mehr – schnell, klar, professionell. Später mit Subscription & Paywall.">
+  <meta name="theme-color" content="#0b0b0c">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="fnothing Signals – Krypto- & Aktien-Signale">
+  <meta property="og:description" content="Strukturierte Signale, klare Setups, später als Subscription hinter Paywall.">
+  <meta property="og:url" content="https://fnothing.com/">
+  <meta property="og:image" content="https://fnothing.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Manifest & OneSignal SDK (für Web-Push) -->
+  <link rel="manifest" href="/manifest.json" />
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+
+  <!-- Favicon (SVG Placeholder) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='48' fill='%230b0b0c'/%3E%3Cpath d='M64 168h64M128 168l64-80M64 128h48' stroke='%23ffffff' stroke-width='16' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+  <style>
+    /* ---------- Design Tokens ---------- */
+    :root {
+      --bg: #0b0b0c;
+      --panel: #111114;
+      --elev: #16161a;
+      --text: #f4f4f5;
+      --muted: #c4c4c7;
+      --line: #27272a;
+      --brand: #7c5cff;
+      --brand-2: #00e0a4;
+      --danger: #ff7a7a;
+      --ok: #17c964;
+      --radius: 16px;
+      --shadow: 0 8px 24px rgba(0,0,0,.35);
+      --w: min(1120px, 92vw);
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#ffffff; --panel:#f6f7f9; --elev:#ffffff; --text:#111114; --muted:#444; --line:#e5e7eb; }
+    }
+
+    /* ---------- Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,Arial,sans-serif;
+      background: radial-gradient(1200px 600px at 70% -10%, rgba(124,92,255,.18), transparent 60%), var(--bg);
+      color: var(--text); line-height: 1.55;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: var(--w); margin-inline: auto; }
+    .visually-hidden { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+
+    /* ---------- Utilities ---------- */
+    .stack { display: grid; gap: 1rem; }
+    .stack-lg { display: grid; gap: 2rem; }
+    .grid { display: grid; gap: 1rem; }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 900px){ .grid-3 { grid-template-columns: 1fr; } }
+    .card {
+      background: linear-gradient(180deg, var(--elev), var(--panel));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.2rem;
+      box-shadow: var(--shadow);
+    }
+    .kicker { letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; color: var(--muted); }
+    .h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; margin: .2rem 0 .6rem; }
+    .h2 { font-size: clamp(1.4rem, 2.6vw, 2rem); margin: 0 0 .5rem; }
+    .muted { color: var(--muted); }
+    .badge {
+      display:inline-flex; align-items:center; gap:.5rem; font-size:.85rem; padding:.35rem .6rem;
+      border:1px solid var(--line); border-radius:999px; background:rgba(124,92,255,.08);
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
+      padding:.9rem 1.1rem; border-radius:12px; border:1px solid var(--line); cursor:pointer; font-weight:600;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      will-change: transform;
+    }
+    .btn:is(:hover,:focus-visible){ transform: translateY(-1px); }
+    .btn-primary { background: linear-gradient(180deg, var(--brand), #5a3dff); color:#fff; border-color: transparent; }
+    .btn-ghost { background: transparent; }
+    .btn-outline { background: transparent; border-color: var(--brand); color: var(--brand); }
+
+    /* ---------- Header / Nav ---------- */
+    header {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(140%) blur(6px);
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display:flex; align-items:center; justify-content:space-between; padding:.8rem 0; }
+    .brand { display:flex; gap:.7rem; align-items:center; font-weight:700; }
+    .logo {
+      width: 32px; height: 32px; border-radius:10px; display:grid; place-items:center;
+      background: linear-gradient(180deg, var(--brand), #5a3dff); color:#fff; font-weight:800;
+      box-shadow: var(--shadow);
+    }
+    .navlinks { display:flex; gap:.9rem; align-items:center; }
+    .navlinks a { padding:.6rem .7rem; border-radius:10px; }
+    .navlinks a:is(:hover,:focus-visible){ background:rgba(124,92,255,.1); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 3.6rem 0 2.4rem; }
+    .hero .lede { font-size: clamp(1rem, 1.6vw, 1.125rem); color: var(--muted); max-width: 70ch; }
+    .cta { display:flex; gap:.8rem; flex-wrap: wrap; margin-top:1.2rem; }
+
+    /* ---------- Trust / Stats ---------- */
+    .stats { display:grid; grid-template-columns: repeat(4,1fr); gap:1rem; }
+    @media (max-width:1000px){ .stats { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width:600px){ .stats { grid-template-columns: 1fr; } }
+    .stat { padding:1.1rem; border:1px dashed var(--line); border-radius:14px; background:linear-gradient(180deg, transparent, rgba(124,92,255,.06)); }
+    .stat b { font-size:1.3rem; }
+
+    /* ---------- Features ---------- */
+    .feature {
+      display:flex; gap:1rem; align-items:flex-start;
+      padding:1rem; border:1px solid var(--line); border-radius:14px; background: var(--elev);
+    }
+    .icon {
+      width: 42px; height: 42px; border-radius:12px; display:grid; place-items:center;
+      background:linear-gradient(180deg, rgba(124,92,255,.2), rgba(124,92,255,.05)); border:1px solid var(--line);
+      font-weight:800;
+    }
+
+    /* ---------- Pricing ---------- */
+    .pricing { display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; }
+    @media (max-width: 1000px){ .pricing { grid-template-columns: 1fr; } }
+    .tier { padding:1.4rem; border:1px solid var(--line); border-radius:16px; background:linear-gradient(180deg, var(--elev), var(--panel)); position:relative; }
+    .tier.popular { outline: 2px solid var(--brand); }
+    .price { font-size:2.2rem; font-weight:800; margin:.2rem 0; }
+    .toggle {
+      display:inline-flex; gap:.4rem; align-items:center; padding:.3rem; border-radius:999px; border:1px solid var(--line);
+    }
+    .toggle button { border:0; background:transparent; padding:.5rem .8rem; border-radius:999px; cursor:pointer; color:var(--muted); }
+    .toggle button.active { background:rgba(124,92,255,.16); color:var(--text); }
+
+    /* ---------- Footer ---------- */
+    footer { border-top:1px solid var(--line); margin-top:3rem; }
+    .foot { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; padding:1.4rem 0; }
+    .legal { font-size:.9rem; color:var(--muted); }
+
+    /* ---------- Focus & Motion ---------- */
+    :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 8px; }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+    /* ---------- Sections spacing ---------- */
+    section { padding: 2.2rem 0; }
+  </style>
+</head>
+<body>
+  <a class="visually-hidden" href="#inhalt">Zum Inhalt springen</a>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="/" aria-label="Startseite">
+        <span class="logo">F</span>
+        <span>fnothing <span class="muted">Signals</span></span>
+      </a>
+      <nav class="navlinks" aria-label="Hauptnavigation">
+        <a href="#vorteile">Vorteile</a>
+        <a href="#maerkte">Märkte</a>
+        <a href="#preise">Preise</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-outline" href="#waitlist">Zugang anfragen</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inhalt">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container stack-lg">
+        <div class="stack">
+          <span class="badge"><span aria-hidden="true">⚡</span> Reaktionsschnell • Klar • Erweiterbar</span>
+          <h1 class="h1">Signale für Krypto, Aktien & mehr – klar strukturiert, bereit für deinen Edge.</h1>
+          <p class="lede">fnothing Signals liefert saubere Setups mit Entry-, SL- und TP-Zonen, damit du schneller entscheiden kannst. Später mit Subscription hinter Paywall – heute schon als stabile Basis für deinen Bot.</p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#waitlist">Zugang sichern</a>
+            <a class="btn btn-ghost" href="#preise">Preise ansehen</a>
+            <!-- NEU: Web-Push Aktivierung & Status -->
+            <button class="btn btn-outline" id="push-btn" type="button">🔔 Push aktivieren</button>
+            <span id="push-state" class="muted" style="align-self:center"></span>
+          </div>
+        </div>
+
+        <div class="stats" aria-label="Kennzahlen">
+          <div class="stat"><b>24/7</b><br><span class="muted">Monitoring</span></div>
+          <div class="stat"><b>&lt; 1s</b><br><span class="muted">Client-Side Render-Latenz</span></div>
+          <div class="stat"><b>Multi-Asset</b><br><span class="muted">Krypto • Aktien • FX (optional)</span></div>
+          <div class="stat"><b>API-Ready</b><br><span class="muted">Webhooks & Integrationen</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vorteile -->
+    <section id="vorteile">
+      <div class="container stack-lg">
+        <p class="kicker">Warum fnothing</p>
+        <h2 class="h2">Signalqualität & Klarheit, die skaliert</h2>
+
+        <div class="grid grid-3">
+          <article class="feature">
+            <div class="icon" aria-hidden="true">①</div>
+            <div>
+              <h3 class="h3">Klares Setup-Format</h3>
+              <p class="muted">Einheitliche Struktur mit Entry, Stop, Targets & Zeitrahmen – ideal für manuelle wie automatisierte Ausführung.</p>
+            </div>
+          </article>
+          <article class="feature">
+            <div class="icon" aria-hidden="true">②</div>
+            <div>
+              <h3 class="h3">Signal-Kanäle nach Wahl</h3>
+              <p class="muted">Webhook/API, E-Mail, Telegram oder Dashboard – du entscheidest, wo die Signale landen.</p>
+            </div>
+          </article>
+          <article class="feature">
+            <div class="icon" aria-hidden="true">③</div>
+            <div>
+              <h3 class="h3">Risikoparameter</h3>
+              <p class="muted">Platzhalter für deine spätere Risikosteuerung (PosGröße, R-Multiplikator, Max-DD) – UI ist vorbereitet.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="card">
+          <strong>Integrations-Hook (Platzhalter)</strong>
+          <p class="muted">Hier fügst du später deinen Bot ein (Script-Snippet / SDK / Widget). Die Karte hat bewusst eine neutrale Oberfläche, damit du nur die Einbindung austauschen musst.</p>
+          <!-- === BOT-INTEGRATION START ===
+          <script src="DEIN-BOT-SNIPPET.js"></script>
+          <div id="dein-bot-widget"></div>
+          === BOT-INTEGRATION ENDE === -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Märkte -->
+    <section id="maerkte">
+      <div class="container stack-lg">
+        <p class="kicker">Abdeckung</p>
+        <h2 class="h2">Multi-Asset ohne Ballast</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Krypto</h3>
+            <p class="muted">BTC, ETH, Large Caps sowie ausgewählte Perpetuals. Signale mit klaren Risiko-/Ertrags-Zonen.</p>
+          </div>
+          <div class="card">
+            <h3>Aktien</h3>
+            <p class="muted">US & EU Blue Chips, Momentum-Listen; Timeframes von Intraday bis Swing.</p>
+          </div>
+          <div class="card">
+            <h3>Mehr</h3>
+            <p class="muted">Erweiterbar auf FX, Indizes, Rohstoffe – UI & Routing sind vorbereitet.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="preise">
+      <div class="container stack-lg">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+          <div>
+            <p class="kicker">Preise</p>
+            <h2 class="h2">Einfaches, skalierbares Pricing</h2>
+            <p class="muted">Abrechnung monatlich oder jährlich (−2 Monate gratis). Später per Paywall aktiv.</p>
+          </div>
+          <div class="toggle" role="tablist" aria-label="Abrechnungszeitraum">
+            <button id="t-monthly" class="active" aria-selected="true" aria-controls="price-panels">Monatlich</button>
+            <button id="t-yearly" aria-selected="false" aria-controls="price-panels">Jährlich</button>
+          </div>
+        </div>
+
+        <div id="price-panels" class="pricing" aria-live="polite">
+          <div class="tier">
+            <span class="kicker">Starter</span>
+            <div class="price" data-price data-monthly="€19" data-yearly="€190">€19</div>
+            <p class="muted">Für den Einstieg & Paper-Trading.</p>
+            <ul>
+              <li>Basis-Signale (verzögert)</li>
+              <li>Dashboard-Zugang</li>
+              <li>E-Mail-Routing</li>
+            </ul>
+            <a class="btn btn-primary" href="#waitlist">Bald verfügbar</a>
+          </div>
+
+          <div class="tier popular">
+            <span class="kicker">Pro</span>
+            <div class="price" data-price data-monthly="€49" data-yearly="€490">€49</div>
+            <p class="muted">Live-Signale & erweiterte Kanäle.</p>
+            <ul>
+              <li>Live-Signale (niedrige Latenz)</li>
+              <li>Telegram/Webhook/API</li>
+              <li>Risikoparameter-Presets</li>
+            </ul>
+            <a class="btn btn-primary" href="#waitlist">Bald verfügbar</a>
+          </div>
+
+          <div class="tier">
+            <span class="kicker">Institutional</span>
+            <div class="price" data-price data-monthly="Custom" data-yearly="Custom">Custom</div>
+            <p class="muted">Maßgeschneiderte Feeds & SLOs.</p>
+            <ul>
+              <li>Dedizierte Feeds</li>
+              <li>Priorisierter Support</li>
+              <li>On-Prem/Virtual Private Routing</li>
+            </ul>
+            <a class="btn btn-ghost" href="#kontakt">Anfrage senden</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waitlist / Lead -->
+    <section id="waitlist">
+      <div class="container stack-lg">
+        <p class="kicker">Früher Zugang</p>
+        <h2 class="h2">Trag dich ein – wir melden uns zum Launch</h2>
+        <div class="card">
+          <form class="stack" method="post" action="#" onsubmit="event.preventDefault(); alert('Danke! Wir melden uns per E-Mail.');">
+            <label for="email">E-Mail</label>
+            <input id="email" name="email" type="email" required
+                   placeholder="dein@email.de"
+                   style="padding:.9rem 1rem; border-radius:12px; border:1px solid var(--line); background:var(--elev); color:var(--text); width:100%;">
+            <small class="muted">Wir schicken nur Relevantes zum Produktstart. Kein Spam.</small>
+            <div><button class="btn btn-primary" type="submit">Auf die Liste</button></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container stack-lg">
+        <p class="kicker">FAQ</p>
+        <h2 class="h2">Häufige Fragen</h2>
+        <div class="grid">
+          <details class="card">
+            <summary><strong>Ist das Anlageberatung?</strong></summary>
+            <p class="muted">Nein. Die bereitgestellten Informationen sind <strong>keine</strong> Anlageberatung und keine Empfehlung zum Kauf/Verkauf von Finanzinstrumenten. Du handelst eigenverantwortlich.</p>
+          </details>
+          <details class="card">
+            <summary><strong>Welche Latenz haben die Signale?</strong></summary>
+            <p class="muted">Die UI rendert client-seitig sehr schnell. Die effektive Latenz hängt von deinem Routing (z. B. Telegram, Webhook) und Drittanbietern ab.</p>
+          </details>
+          <details class="card">
+            <summary><strong>Welche Märkte sind enthalten?</strong></summary>
+            <p class="muted">Standardmäßig Krypto & Aktien. Erweiterungen (FX, Indizes) sind vorgesehen und können aktiv geschaltet werden.</p>
+          </details>
+          <details class="card">
+            <summary><strong>Kann ich meinen eigenen Bot integrieren?</strong></summary>
+            <p class="muted">Ja. In der Sektion „Integrations-Hook“ findest du den Platzhalter für dein Script/Widget.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section aria-label="Rechtlicher Hinweis">
+      <div class="container card">
+        <p class="muted">
+          <strong>Wichtiger Hinweis:</strong> Handel mit Kryptowährungen, Aktien, Derivaten und anderen Finanzinstrumenten ist mit erheblichen Risiken verbunden.
+          Frühere Ergebnisse sind kein Indikator für zukünftige Entwicklungen. Dies ist keine Finanzberatung.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot">
+      <div class="brand">
+        <span class="logo">F</span>
+        <span>fnothing <span class="muted">Signals</span></span>
+      </div>
+      <div class="legal">© <span id="year"></span> fnothing. Alle Rechte vorbehalten. · <a class="muted" href="#impressum">Impressum</a> · <a class="muted" href="#agb">AGB</a> · <a class="muted" href="#datenschutz">Datenschutz</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Jahr im Footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Pricing Toggle (Monatlich / Jährlich)
+    const tMonthly = document.getElementById('t-monthly');
+    const tYearly  = document.getElementById('t-yearly');
+    const prices   = document.querySelectorAll('[data-price]');
+    function setBilling(mode){
+      prices.forEach(el => { el.textContent = el.dataset[mode]; });
+      tMonthly.classList.toggle('active', mode === 'monthly');
+      tYearly.classList.toggle('active',  mode === 'yearly');
+      tMonthly.setAttribute('aria-selected', mode === 'monthly');
+      tYearly.setAttribute('aria-selected',  mode === 'yearly');
+    }
+    tMonthly?.addEventListener('click', () => setBilling('monthly'));
+    tYearly?.addEventListener('click',  () => setBilling('yearly'));
+  </script>
+
+  <!-- JSON-LD (Organisation, minimal) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "fnothing Signals",
+    "url": "https://fnothing.com",
+    "logo": "https://fnothing.com/favicon.svg"
+  }
+  </script>
+
+  <!-- OneSignal Init & UI-Logik -->
+  <script>
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function () {
+      OneSignal.init({
+        appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0", // ← trage hier deine OneSignal App-ID ein
+        safari_web_id: "",               // optional (falls von OneSignal vergeben)
+        notifyButton: { enable: false },  // wir nutzen unseren eigenen Button
+        promptOptions: { slidedown: { enabled: false } }
+      });
+
+      // Tag für Zielgruppe setzen (alle Abonnenten dieses Tags bekommen später die Signale)
+      OneSignal.sendTag("signals", "true");
+
+      const btn = document.getElementById('push-btn');
+      const state = document.getElementById('push-state');
+
+      async function refreshState(){
+        try {
+          const enabled = await OneSignal.isPushNotificationsEnabled();
+          const perm = await OneSignal.getNotificationPermission();
+          state.textContent = enabled ? `Status: abonniert ✓ (${perm})` : `Status: nicht abonniert (${perm})`;
+          // Wenn Nutzer blockiert hat → Button deaktivieren
+          btn.disabled = (perm === 'denied');
+        } catch(e){ console.error(e); }
+      }
+
+      btn?.addEventListener('click', async () => {
+        try {
+          // iOS: Web‑Push funktioniert am besten, wenn die Seite zum Home‑Screen hinzugefügt wurde (PWA)
+          await OneSignal.Slidedown.promptPush();
+          refreshState();
+        } catch(e){ console.error(e); }
+      });
+
+      refreshState();
+    });
+  </script>
+</body>
+</html>
