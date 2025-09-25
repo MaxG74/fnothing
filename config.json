@@ -1,0 +1,7 @@
+{
+  "scoreThreshold": 72,
+  "quiet": { "tz": "Europe/Berlin", "start": 23, "end": 6 },
+  "dedupeHours": 6,
+  "concurrency": 4,
+  "maxHeadlines": 4
+}
