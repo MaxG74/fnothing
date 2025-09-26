@@ -413,6 +413,14 @@
     "logo": "https://fnothing.com/favicon.svg"
   }
   </script>
+<script>
+  // www → non-www zwingen (https://www.fnothing.com → https://fnothing.com)
+  (function () {
+    if (location.hostname.startsWith('www.')) {
+      location.replace(location.href.replace('//www.', '//'));
+    }
+  })();
+</script>
 
   <!-- OneSignal v16 (einmal laden & initialisieren) -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
