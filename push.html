@@ -1,15 +1,16 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <!-- fnothing · Web Push Test · OneSignal v16 -->
+  <!-- fnothing · Web Push Test · OneSignal v16 (Custom Code im HEAD) -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>fnothing · Web Push Test</title>
   <meta name="description" content="Diagnose & Abo-Flow für Web Push mit OneSignal v16.">
   <meta name="theme-color" content="#0b0b0c">
+
+  <!-- Canonical & no-www (OneSignal Domain muss exakt passen) -->
   <link rel="canonical" href="https://fnothing.com/push.html">
   <script>
-    // www → non-www (OneSignal Domain muss exakt passen)
     if (location.hostname.startsWith('www.')) {
       location.replace(location.href.replace('//www.', '//'));
     }
@@ -19,6 +20,35 @@
   <link rel="manifest" href="/manifest.json" />
   <link rel="apple-touch-icon" href="/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- Performance -->
+  <link rel="preconnect" href="https://cdn.onesignal.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.onesignal.com">
+
+  <!-- OneSignal v16 SDK + Custom Code (HEAD – EINMALIGE Initialisierung) -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    window.OneSignalDeferred.push(async function(OneSignal) {
+      try {
+        if (location.hostname !== "fnothing.com") {
+          throw new Error("Can only be used on: https://fnothing.com");
+        }
+        await OneSignal.init({
+          appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
+          safari_web_id: "web.onesignal.auto.4bf73218-3550-4659-982d-970270d14d2d",
+          serviceWorkerPath: "/OneSignalSDKWorker.js",
+          serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js",
+          serviceWorkerParam: { scope: "/" },
+          notifyButton: { enable: false } // hier bewusst aus, um Test-UI nicht zu stören
+        });
+        // OPTIONAL: globales Tag für den Test setzen (kannst du rausnehmen)
+        try { await OneSignal.User.addTag("signals", "true"); } catch(_) {}
+      } catch (e) {
+        console.warn("OneSignal HEAD init error:", e);
+      }
+    });
+  </script>
 
   <!-- Styles (Farben wie auf der Hauptseite) -->
   <style>
@@ -135,8 +165,7 @@
   <!-- Script: Footer year -->
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
-  <!-- OneSignal v16 SDK -->
-  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <!-- Diagnose/Bedienung (KEIN zweites OneSignal.init!) -->
   <script>
     const $ = s => document.querySelector(s);
     const out = $("#out");
@@ -159,24 +188,11 @@
       }
     })();
 
-    // OneSignal init
+    // UI-Logik: wartet auf die im HEAD erfolgte OneSignal-Initialisierung
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     window.OneSignalDeferred.push(async function(OneSignal) {
-      try {
-        await OneSignal.init({
-          appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
-          serviceWorkerPath: "/OneSignalSDKWorker.js",
-          serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js",
-          serviceWorkerParam: { scope: "/" },
-          notifyButton: { enable: false }
-        });
-        log("init", "OneSignal initialisiert.");
-        await status("init");
-      } catch (e) {
-        log("init error", e.message || e);
-      }
+      try { await status("init"); } catch(_) {}
 
-      // Status
       async function status(label="status") {
         try {
           const supported = await OneSignal.Notifications.isPushSupported();
@@ -194,7 +210,8 @@
         }
       }
 
-      // Prompt
+      $("#btn-status").addEventListener("click", () => status("manual"));
+
       $("#btn-prompt").addEventListener("click", async () => {
         try{
           const supported = await OneSignal.Notifications.isPushSupported();
@@ -215,7 +232,6 @@
         await status("after prompt");
       });
 
-      // Native Permission
       $("#btn-native").addEventListener("click", async () => {
         try{
           const res = await Notification.requestPermission();
@@ -226,12 +242,16 @@
         await status("after native");
       });
 
-      // Lokale Test-Notification (zeigt nur, ob SW/Notifications funktionieren – kein Push von OneSignal)
+      // Lokale Test-Notification (keine OneSignal-Cloud – nur SW/OS-Pfad)
       $("#btn-local").addEventListener("click", async () => {
         try{
           if (!("serviceWorker" in navigator)) { alert("Kein ServiceWorker verfügbar."); return; }
           const reg = (await navigator.serviceWorker.getRegistration()) || (await navigator.serviceWorker.ready);
           if (!reg) { alert("Kein aktiver ServiceWorker gefunden."); return; }
+          if (Notification.permission !== "granted") {
+            const res = await Notification.requestPermission();
+            if (res !== "granted") { alert("Benachrichtigungen nicht erlaubt."); return; }
+          }
           await reg.showNotification("fnothing · Lokaler Test", {
             body: "Wenn du das siehst, sind SW & Notifications OK.",
             icon: "/icon-192.png",
@@ -244,10 +264,6 @@
         }
       });
 
-      // Status
-      $("#btn-status").addEventListener("click", () => status("manual"));
-
-      // Reset
       $("#btn-reset").addEventListener("click", async () => {
         try {
           const regs = await navigator.serviceWorker.getRegistrations();
@@ -265,3 +281,4 @@
   </script>
 </body>
 </html>
+
