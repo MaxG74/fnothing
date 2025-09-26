@@ -15,9 +15,11 @@
   <meta property="og:image" content="https://fnothing.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Manifest & OneSignal SDK (für Web-Push) -->
+  <!-- PWA Manifest & iOS metas -->
   <link rel="manifest" href="/manifest.json" />
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <!-- Favicon (SVG Placeholder) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='48' fill='%230b0b0c'/%3E%3Cpath d='M64 168h64M128 168l64-80M64 128h48' stroke='%23ffffff' stroke-width='16' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -135,9 +137,8 @@
     .tier { padding:1.4rem; border:1px solid var(--line); border-radius:16px; background:linear-gradient(180deg, var(--elev), var(--panel)); position:relative; }
     .tier.popular { outline: 2px solid var(--brand); }
     .price { font-size:2.2rem; font-weight:800; margin:.2rem 0; }
-    .toggle {
-      display:inline-flex; gap:.4rem; align-items:center; padding:.3rem; border-radius:999px; border:1px solid var(--line);
-    }
+
+    .toggle { display:inline-flex; gap:.4rem; align-items:center; padding:.3rem; border-radius:999px; border:1px solid var(--line); }
     .toggle button { border:0; background:transparent; padding:.5rem .8rem; border-radius:999px; cursor:pointer; color:var(--muted); }
     .toggle button.active { background:rgba(124,92,255,.16); color:var(--text); }
 
@@ -184,7 +185,8 @@
           <div class="cta">
             <a class="btn btn-primary" href="#waitlist">Zugang sichern</a>
             <a class="btn btn-ghost" href="#preise">Preise ansehen</a>
-            <!-- NEU: Web-Push Aktivierung & Status -->
+
+            <!-- Push: Button + Status -->
             <button class="btn btn-outline" id="push-btn" type="button">🔔 Push aktivieren</button>
             <span id="push-state" class="muted" style="align-self:center"></span>
           </div>
@@ -412,244 +414,64 @@
   }
   </script>
 
-  <!-- OneSignal Init & UI-Logik -->
+  <!-- OneSignal v16 (einmal laden & initialisieren) -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function () {
-      OneSignal.init({
-        appId: "YOUR_ONESIGNAL_APP_ID", // ← trage hier deine OneSignal App-ID ein
-        safari_web_id: "",               // optional (falls von OneSignal vergeben)
-        notifyButton: { enable: false },  // wir nutzen unseren eigenen Button
-        promptOptions: { slidedown: { enabled: false } }
-      });
-
-      // Tag für Zielgruppe setzen (alle Abonnenten dieses Tags bekommen später die Signale)
-      OneSignal.sendTag("signals", "true");
-
-      const btn = document.getElementById('push-btn');
-      const state = document.getElementById('push-state');
-
-      async function refreshState(){
-        try {
-          const enabled = await OneSignal.isPushNotificationsEnabled();
-          const perm = await OneSignal.getNotificationPermission();
-          state.textContent = enabled ? `Status: abonniert ✓ (${perm})` : `Status: nicht abonniert (${perm})`;
-          // Wenn Nutzer blockiert hat → Button deaktivieren
-          btn.disabled = (perm === 'denied');
-        } catch(e){ console.error(e); }
-      }
-
-      btn?.addEventListener('click', async () => {
-        try {
-          // iOS: Web‑Push funktioniert am besten, wenn die Seite zum Home‑Screen hinzugefügt wurde (PWA)
-          await OneSignal.Slidedown.promptPush();
-          refreshState();
-        } catch(e){ console.error(e); }
-      });
-
-      refreshState();
-    });
-  </script><!-- OneSignal Web Push v16 -->
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  window.OneSignalDeferred.push(async function(OneSignal) {
-    try {
-      await OneSignal.init({
-        appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
-        notifyButton: { enable: true },                 // kleines Glocken-Widget
-        serviceWorkerParam: { scope: "/" },             // wichtig bei GitHub Pages + Root
-        serviceWorkerPath: "OneSignalSDKWorker.js",
-        serviceWorkerUpdaterPath: "OneSignalSDKUpdaterWorker.js"
-        // safari_web_id: "web.onesignal.auto.…"        // nur falls du Safari Push aktiviert hast
-      });
-
-      // Abo anfragen, falls noch nicht "granted"
-      const perm = await OneSignal.Notifications.permission;
-      if (perm !== "granted") {
-        await OneSignal.Notifications.requestPermission(); // Nutzer fragt/erlaubt
-      }
-
-      // Gerät für Signals markieren (Filter in unserem Scanner)
-      await OneSignal.User.addTag("signals", "true");
-
-      // Debug: User/Subscription-ID in der Konsole
-      console.log("OneSignal ID:", await OneSignal.User.pushSubscriptionId);
-    } catch (e) {
-      console.warn("OneSignal init error", e);
-    }
-  });
-</script>
-<!-- Button ins Hero oder Footer packen -->
-<button id="enablePush" class="btn btn-primary" style="position:fixed; right:16px; bottom:16px; z-index:9999;">
-  🔔 Push-Benachrichtigungen aktivieren
-</button>
-
-<!-- OneSignal v16 -->
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  window.OneSignalDeferred.push(async function(OneSignal) {
-    try {
-      await OneSignal.init({
-        appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
-        notifyButton: { enable: true },                  // kleine Glocke
-        serviceWorkerParam: { scope: "/" },
-        serviceWorkerPath: "OneSignalSDKWorker.js",
-        serviceWorkerUpdaterPath: "OneSignalSDKUpdaterWorker.js"
-      });
-
-      // Status anzeigen (optional)
-      const log = async (label) => {
-        const perm = await OneSignal.Notifications.permission; // "default" | "granted" | "denied"
-        const subId = await OneSignal.User.pushSubscriptionId;
-        console.log(label, { perm, subId });
-      };
-      await log("init");
-
-      // Button klick → Prompt
-      document.getElementById("enablePush").addEventListener("click", async () => {
-        try {
-          // OneSignal Slidedown oder direkt Permission anfragen
-          if (OneSignal.Slidedown?.promptPush) {
-            await OneSignal.Slidedown.promptPush();
-          } else {
-            await OneSignal.Notifications.requestPermission();
-          }
-          await OneSignal.User.addTag("signals", "true"); // wichtig für unsere Filter
-          await log("after request");
-          alert("Push aktiviert (oder bereits aktiv).");
-        } catch (e) {
-          console.warn("push enable error", e);
-          alert("Konnte nicht abonnieren. Siehe Konsole.");
-        }
-      });
-    } catch (e) {
-      console.warn("OneSignal init error", e);
-    }
-  });
-</script>
-<!-- 🔔 Push-Button (sichtbar) -->
-<button id="enablePush" class="btn btn-primary" style="position:fixed; right:16px; bottom:16px; z-index:9999;">
-  🔔 Push-Benachrichtigungen aktivieren
-</button>
-
-<!-- OneSignal v16 SDK -->
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-
-<!-- Diagnose-Panel -->
-<div id="push-debug" style="position:fixed;left:12px;bottom:12px;right:auto;z-index:9999;background:#111;color:#fff;padding:10px 12px;border-radius:12px;border:1px solid #333;font:12px system-ui">
-  <b>Push-Diagnose</b>
-  <div id="push-debug-body">Lade…</div>
-  <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
-    <button id="btn-os-prompt" class="btn" style="padding:6px 10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff">OneSignal Prompt</button>
-    <button id="btn-native-perm" class="btn" style="padding:6px 10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff">Native Permission testen</button>
-    <button id="btn-clear-sw" class="btn" style="padding:6px 10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff">SW/Cache zurücksetzen</button>
-  </div>
-</div>
-
-<script>
-  // iOS Install-Hinweis (nur wenn nicht als Standalone)
-  (function(){
-    const ua = navigator.userAgent.toLowerCase();
-    const isIOS = /iphone|ipad|ipod/.test(ua);
-    const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
-    if (isIOS && !isStandalone) {
-      const box = document.createElement('div');
-      box.style.cssText = "position:fixed;top:12px;left:12px;right:12px;background:#fff;color:#111;padding:12px;border:1px solid #e5e7eb;border-radius:12px;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,.15)";
-      box.innerHTML = "<b>iPhone: Push aktivieren</b><br>In <u>Safari</u> öffnen → <em>Teilen</em> → <em>Zum Home-Bildschirm</em>. Danach die App vom Homescreen starten.";
-      document.body.appendChild(box);
-      setTimeout(()=>box.remove(), 8000);
-    }
-  })();
-
-  // OneSignal initialisieren
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  window.OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
-      notifyButton: { enable: true },
-      serviceWorkerParam: { scope: "/" },
-      serviceWorkerPath: "OneSignalSDKWorker.js",
-      serviceWorkerUpdaterPath: "OneSignalSDKUpdaterWorker.js"
-    });
-
-    const $ = s=>document.querySelector(s);
-    const dbg = $("#push-debug-body");
-
-    async function snapshot(label){
+    // Hinweis für iOS, falls nicht als PWA (Standalone) geöffnet
+    (function(){
+      const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
       const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
-      const info = {
-        label,
-        ua: navigator.userAgent,
-        displayMode: isStandalone ? "standalone" : "browser",
-        hasSW: !!('serviceWorker' in navigator),
-        hasPushMgr: !!('PushManager' in window),
-        notifPerm: (window.Notification ? Notification.permission : "n/a"),
-        osSupported: await OneSignal.Notifications.isPushSupported().catch(()=>false),
-        osPerm: await OneSignal.Notifications.permission,
-        osSubId: await OneSignal.User.pushSubscriptionId
-      };
-      dbg.innerHTML = `
-        display: <b>${info.displayMode}</b> · SW:${info.hasSW} · PushMgr:${info.hasPushMgr} ·
-        Notification.permission: <b>${info.notifPerm}</b><br>
-        OneSignal: supported:<b>${info.osSupported}</b> · perm:<b>${info.osPerm}</b> · subId:<code>${info.osSubId||'–'}</code>
-      `;
-      return info;
-    }
+      if (isIOS && !isStandalone) {
+        const box = document.createElement('div');
+        box.style.cssText = "position:fixed;top:12px;left:12px;right:12px;background:#fff;color:#111;padding:12px;border:1px solid #e5e7eb;border-radius:12px;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,.15)";
+        box.innerHTML = "<b>iPhone: Push aktivieren</b><br>In <u>Safari</u> öffnen → <em>Teilen</em> → <em>Zum Home-Bildschirm</em>. Danach die App vom Homescreen starten.";
+        document.body.appendChild(box);
+        setTimeout(()=>box.remove(), 8000);
+      }
+    })();
 
-    // Initialen Status zeigen
-    await snapshot("init");
-
-    // 🔔 Hauptbutton (unten rechts)
-    document.getElementById("enablePush").addEventListener("click", async () => {
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    window.OneSignalDeferred.push(async function(OneSignal) {
       try {
-        if (OneSignal.Slidedown?.promptPush) {
-          await OneSignal.Slidedown.promptPush();
-        } else {
-          await OneSignal.Notifications.requestPermission(); // native
+        await OneSignal.init({
+          appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
+          serviceWorkerPath: "/OneSignalSDKWorker.js",
+          serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js",
+          serviceWorkerParam: { scope: "/" },
+          notifyButton: { enable: true }
+        });
+
+        const btn   = document.getElementById("push-btn");
+        const state = document.getElementById("push-state");
+
+        async function updateState() {
+          const supported = await OneSignal.Notifications.isPushSupported();
+          const perm      = await OneSignal.Notifications.permission; // default | granted | denied
+          const subId     = await OneSignal.User.pushSubscriptionId;
+          state.textContent = `Support: ${supported} · Permission: ${perm} · ID: ${subId || "–"}`;
+          if (btn) btn.disabled = (perm === 'denied' || !supported);
         }
-        await OneSignal.User.addTag("signals","true");
-        const id = await OneSignal.User.pushSubscriptionId;
-        alert("Push aktiviert (oder bereits aktiv). ID: " + (id||"–"));
-      } catch(e) {
-        console.warn(e);
-        alert("Konnte nicht abonnieren. Siehe Diagnose unten.");
-      } finally {
-        await snapshot("after-main-btn");
+
+        btn?.addEventListener("click", async () => {
+          try {
+            const supported = await OneSignal.Notifications.isPushSupported();
+            if (!supported) { alert("Push wird hier nicht unterstützt (z. B. iOS-Browser-Tab). Öffne die PWA vom Homescreen."); return; }
+            if (OneSignal.Slidedown?.promptPush) await OneSignal.Slidedown.promptPush();
+            else await OneSignal.Notifications.requestPermission();
+            await OneSignal.User.addTag("signals","true");
+          } catch (e) {
+            console.error("subscribe error", e);
+            alert("Konnte nicht abonnieren. Siehe Konsole.");
+          } finally {
+            await updateState();
+          }
+        });
+
+        await updateState();
+      } catch (e) {
+        console.error("OneSignal init error", e);
       }
     });
-
-    // Diagnose-Buttons
-    document.getElementById("btn-os-prompt").onclick = async ()=>{
-      try{
-        await OneSignal.Slidedown?.promptPush();
-        await OneSignal.User.addTag("signals","true");
-      }catch(e){console.warn(e)}
-      await snapshot("after-os-prompt");
-    };
-    document.getElementById("btn-native-perm").onclick = async ()=>{
-      try{
-        const res = await Notification.requestPermission();
-        alert("Notification.permission: " + res);
-      }catch(e){alert(e.message)}
-      await snapshot("after-native");
-    };
-    document.getElementById("btn-clear-sw").onclick = async ()=>{
-      try{
-        const regs = await navigator.serviceWorker.getRegistrations();
-        for (const r of regs) await r.unregister();
-        if (window.caches) { const keys = await caches.keys(); for (const k of keys) await caches.delete(k); }
-        localStorage.clear(); sessionStorage.clear();
-        alert("Zurückgesetzt. App beenden & neu starten, dann erneut versuchen.");
-      }catch(e){alert(e.message)}
-      await snapshot("after-clear");
-    };
-
-    // iOS braucht oft einen 2. Start, bis der SW kontrolliert – Status nochmal nach 2s
-    setTimeout(()=>snapshot("2s-later"), 2000);
-  });
-</script>
-
+  </script>
 </body>
 </html>
