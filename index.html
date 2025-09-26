@@ -1,11 +1,23 @@
 <!doctype html>
 <html lang="de">
 <head>
+  <!-- =====================================================================
+       fnothing · Signals — High-Performance Static Site (GitHub Pages ready)
+       ===================================================================== -->
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>fnothing Signals – Krypto- & Aktien-Signale</title>
   <meta name="description" content="fnothing Signals liefert strukturierte Handels-Signale für Krypto, Aktien & mehr – schnell, klar, professionell. Später mit Subscription & Paywall.">
   <meta name="theme-color" content="#0b0b0c">
+
+  <!-- Canonical & no-www enforcement (OneSignal erlaubt nur https://fnothing.com) -->
+  <link rel="canonical" href="https://fnothing.com/">
+  <script>
+    if (location.hostname.startsWith('www.')) {
+      location.replace(location.href.replace('//www.', '//'));
+    }
+  </script>
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
@@ -15,155 +27,146 @@
   <meta property="og:image" content="https://fnothing.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- PWA Manifest & iOS metas -->
+  <!-- PWA / iOS -->
   <link rel="manifest" href="/manifest.json" />
   <link rel="apple-touch-icon" href="/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-  <!-- Favicon (SVG Placeholder) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='48' fill='%230b0b0c'/%3E%3Cpath d='M64 168h64M128 168l64-80M64 128h48' stroke='%23ffffff' stroke-width='16' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <!-- Performance hints -->
+  <link rel="preconnect" href="https://cdn.onesignal.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.onesignal.com">
+
+  <!-- Favicon (SVG) -->
+  <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%235a3dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='12' width='48' height='48' fill='url(%23g)'/%3E%3Cpath d='M13 30h11M24 30l11-14M13 23h8' stroke='%23fff' stroke-linecap='round' stroke-width='3'/%3E%3C/svg%3E">
 
   <style>
-    /* ---------- Design Tokens ---------- */
-    :root {
-      --bg: #0b0b0c;
-      --panel: #111114;
-      --elev: #16161a;
-      --text: #f4f4f5;
-      --muted: #c4c4c7;
-      --line: #27272a;
-      --brand: #7c5cff;
-      --brand-2: #00e0a4;
-      --danger: #ff7a7a;
-      --ok: #17c964;
-      --radius: 16px;
-      --shadow: 0 8px 24px rgba(0,0,0,.35);
-      --w: min(1120px, 92vw);
+    /* --------------------------- Design Tokens --------------------------- */
+    :root{
+      --bg:#0b0b0c; --panel:#111114; --elev:#16161a; --text:#f4f4f5; --muted:#c4c4c7;
+      --line:#27272a; --brand:#7c5cff; --brand2:#00e0a4; --danger:#ff7a7a; --ok:#17c964;
+      --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35); --w:min(1180px,92vw);
     }
-    @media (prefers-color-scheme: light) {
-      :root { --bg:#ffffff; --panel:#f6f7f9; --elev:#ffffff; --text:#111114; --muted:#444; --line:#e5e7eb; }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#fff; --panel:#f6f7f9; --elev:#fff; --text:#111114; --muted:#444; --line:#e5e7eb; }
     }
 
-    /* ---------- Base ---------- */
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0; font-family: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,Arial,sans-serif;
-      background: radial-gradient(1200px 600px at 70% -10%, rgba(124,92,255,.18), transparent 60%), var(--bg);
-      color: var(--text); line-height: 1.55;
+    /* ------------------------------ Base -------------------------------- */
+    *,*::before,*::after{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; color:var(--text);
+      font: 16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;
+      background:
+        radial-gradient(1200px 600px at 70% -10%, rgba(124,92,255,.16), transparent 60%),
+        radial-gradient(800px 400px at 10% -10%, rgba(0,224,164,.10), transparent 50%),
+        var(--bg);
     }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    .container { width: var(--w); margin-inline: auto; }
-    .visually-hidden { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+    a{ color:inherit; text-decoration:none }
+    img{ max-width:100%; display:block }
+    .container{ width:var(--w); margin-inline:auto }
+    .visually-hidden{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0 }
 
-    /* ---------- Utilities ---------- */
-    .stack { display: grid; gap: 1rem; }
-    .stack-lg { display: grid; gap: 2rem; }
-    .grid { display: grid; gap: 1rem; }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    @media (max-width: 900px){ .grid-3 { grid-template-columns: 1fr; } }
-    .card {
-      background: linear-gradient(180deg, var(--elev), var(--panel));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 1.2rem 1.2rem;
-      box-shadow: var(--shadow);
+    /* ---------------------------- Utilities ----------------------------- */
+    .stack{ display:grid; gap:1rem }
+    .stack-lg{ display:grid; gap:2rem }
+    .grid{ display:grid; gap:1rem }
+    .grid-3{ grid-template-columns:repeat(3, minmax(0,1fr)) }
+    @media (max-width: 960px){ .grid-3{ grid-template-columns:1fr } }
+    .card{
+      background:linear-gradient(180deg, var(--elev), var(--panel));
+      border:1px solid var(--line); border-radius:var(--radius);
+      padding:1.25rem; box-shadow:var(--shadow)
     }
-    .kicker { letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; color: var(--muted); }
-    .h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; margin: .2rem 0 .6rem; }
-    .h2 { font-size: clamp(1.4rem, 2.6vw, 2rem); margin: 0 0 .5rem; }
-    .muted { color: var(--muted); }
-    .badge {
-      display:inline-flex; align-items:center; gap:.5rem; font-size:.85rem; padding:.35rem .6rem;
-      border:1px solid var(--line); border-radius:999px; background:rgba(124,92,255,.08);
-    }
+    .surface{ background:linear-gradient(180deg, var(--elev), var(--panel)); border:1px solid var(--line) }
+    .kicker{ letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; color:var(--muted) }
+    .h1{ font-size:clamp(2rem, 5vw, 3.25rem); line-height:1.1; margin:.2rem 0 .6rem }
+    .h2{ font-size:clamp(1.4rem, 2.6vw, 2rem); margin:0 0 .5rem }
+    .muted{ color:var(--muted) }
+    .badge{ display:inline-flex; align-items:center; gap:.5rem; font-size:.85rem; padding:.4rem .7rem; border:1px solid var(--line); border-radius:999px; background:rgba(124,92,255,.10) }
 
-    /* ---------- Buttons ---------- */
-    .btn { display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
-      padding:.9rem 1.1rem; border-radius:12px; border:1px solid var(--line); cursor:pointer; font-weight:600;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-      will-change: transform;
+    /* ---------------------------- Components ---------------------------- */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(140%) blur(6px);
+      background:color-mix(in oklab, var(--bg) 86%, transparent);
+      border-bottom:1px solid var(--line)
     }
-    .btn:is(:hover,:focus-visible){ transform: translateY(-1px); }
-    .btn-primary { background: linear-gradient(180deg, var(--brand), #5a3dff); color:#fff; border-color: transparent; }
-    .btn-ghost { background: transparent; }
-    .btn-outline { background: transparent; border-color: var(--brand); color: var(--brand); }
+    .nav{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.8rem 0 }
+    .brand{ display:flex; align-items:center; gap:.8rem; font-weight:800 }
+    .logo{ width:36px; height:36px }
+    .navlinks{ display:flex; align-items:center; gap:.6rem; flex-wrap:wrap }
+    .navlinks a{ padding:.5rem .7rem; border-radius:10px }
+    .navlinks a:is(:hover,:focus-visible){ background:rgba(124,92,255,.12) }
 
-    /* ---------- Header / Nav ---------- */
-    header {
-      position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(140%) blur(6px);
-      background: color-mix(in oklab, var(--bg) 85%, transparent);
-      border-bottom: 1px solid var(--line);
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
+      padding:.85rem 1.1rem; border-radius:12px; border:1px solid var(--line);
+      cursor:pointer; font-weight:700; transition:transform .12s ease, background .12s ease, border-color .12s ease;
+      will-change:transform
     }
-    .nav { display:flex; align-items:center; justify-content:space-between; padding:.8rem 0; }
-    .brand { display:flex; gap:.7rem; align-items:center; font-weight:700; }
-    .logo {
-      width: 32px; height: 32px; border-radius:10px; display:grid; place-items:center;
-      background: linear-gradient(180deg, var(--brand), #5a3dff); color:#fff; font-weight:800;
-      box-shadow: var(--shadow);
-    }
-    .navlinks { display:flex; gap:.9rem; align-items:center; }
-    .navlinks a { padding:.6rem .7rem; border-radius:10px; }
-    .navlinks a:is(:hover,:focus-visible){ background:rgba(124,92,255,.1); }
+    .btn:is(:hover,:focus-visible){ transform:translateY(-1px) }
+    .btn-primary{ background:linear-gradient(180deg, var(--brand), #5a3dff); color:#fff; border-color:transparent }
+    .btn-outline{ background:transparent; border-color:var(--brand); color:var(--brand) }
+    .btn-ghost{ background:transparent }
 
-    /* ---------- Hero ---------- */
-    .hero { padding: 3.6rem 0 2.4rem; }
-    .hero .lede { font-size: clamp(1rem, 1.6vw, 1.125rem); color: var(--muted); max-width: 70ch; }
-    .cta { display:flex; gap:.8rem; flex-wrap: wrap; margin-top:1.2rem; }
-
-    /* ---------- Trust / Stats ---------- */
-    .stats { display:grid; grid-template-columns: repeat(4,1fr); gap:1rem; }
-    @media (max-width:1000px){ .stats { grid-template-columns: repeat(2,1fr); } }
-    @media (max-width:600px){ .stats { grid-template-columns: 1fr; } }
-    .stat { padding:1.1rem; border:1px dashed var(--line); border-radius:14px; background:linear-gradient(180deg, transparent, rgba(124,92,255,.06)); }
-    .stat b { font-size:1.3rem; }
-
-    /* ---------- Features ---------- */
-    .feature {
-      display:flex; gap:1rem; align-items:flex-start;
-      padding:1rem; border:1px solid var(--line); border-radius:14px; background: var(--elev);
-    }
-    .icon {
-      width: 42px; height: 42px; border-radius:12px; display:grid; place-items:center;
-      background:linear-gradient(180deg, rgba(124,92,255,.2), rgba(124,92,255,.05)); border:1px solid var(--line);
-      font-weight:800;
+    .hero{ padding:3.8rem 0 2.6rem; position:relative }
+    .hero-art{
+      position:absolute; inset:auto -10% -25% auto; width:min(900px,90vw); height:420px; pointer-events:none; opacity:.35; filter:blur(10px);
+      background:
+        radial-gradient(220px 160px at 30% 35%, rgba(124,92,255,.35), transparent 60%),
+        radial-gradient(260px 180px at 60% 40%, rgba(0,224,164,.20), transparent 60%),
+        conic-gradient(from 30deg at 60% 30%, rgba(90,61,255,.18), transparent 60%);
+      transform:rotate(-6deg)
     }
 
-    /* ---------- Pricing ---------- */
-    .pricing { display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; }
-    @media (max-width: 1000px){ .pricing { grid-template-columns: 1fr; } }
-    .tier { padding:1.4rem; border:1px solid var(--line); border-radius:16px; background:linear-gradient(180deg, var(--elev), var(--panel)); position:relative; }
-    .tier.popular { outline: 2px solid var(--brand); }
-    .price { font-size:2.2rem; font-weight:800; margin:.2rem 0; }
+    .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1rem }
+    @media (max-width:1000px){ .stats{ grid-template-columns:repeat(2,1fr) } }
+    @media (max-width:640px){ .stats{ grid-template-columns:1fr } }
+    .stat{ padding:1.1rem; border:1px dashed var(--line); border-radius:14px; background:linear-gradient(180deg, transparent, rgba(124,92,255,.06)) }
+    .stat b{ font-size:1.3rem }
 
-    .toggle { display:inline-flex; gap:.4rem; align-items:center; padding:.3rem; border-radius:999px; border:1px solid var(--line); }
-    .toggle button { border:0; background:transparent; padding:.5rem .8rem; border-radius:999px; cursor:pointer; color:var(--muted); }
-    .toggle button.active { background:rgba(124,92,255,.16); color:var(--text); }
+    .pricing{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem }
+    @media (max-width:1000px){ .pricing{ grid-template-columns:1fr } }
+    .tier{ padding:1.3rem; border:1px solid var(--line); border-radius:16px; background:linear-gradient(180deg, var(--elev), var(--panel)); position:relative }
+    .tier.popular{ outline:2px solid var(--brand) }
+    .price{ font-size:2.2rem; font-weight:800; margin:.2rem 0 }
+    .toggle{ display:inline-flex; gap:.4rem; align-items:center; padding:.3rem; border-radius:999px; border:1px solid var(--line) }
+    .toggle button{ border:0; background:transparent; padding:.5rem .8rem; border-radius:999px; cursor:pointer; color:var(--muted) }
+    .toggle button.active{ background:rgba(124,92,255,.16); color:var(--text) }
 
-    /* ---------- Footer ---------- */
-    footer { border-top:1px solid var(--line); margin-top:3rem; }
-    .foot { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; padding:1.4rem 0; }
-    .legal { font-size:.9rem; color:var(--muted); }
+    footer{ border-top:1px solid var(--line); margin-top:3rem }
+    .foot{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; padding:1.4rem 0 }
+    .legal{ font-size:.9rem; color:var(--muted) }
 
-    /* ---------- Focus & Motion ---------- */
-    :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 8px; }
-    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
-
-    /* ---------- Sections spacing ---------- */
-    section { padding: 2.2rem 0; }
+    /* Focus & motion */
+    :focus-visible{ outline:2px solid var(--brand); outline-offset:2px; border-radius:8px }
+    @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important } }
+    section{ padding:2.2rem 0 }
   </style>
 </head>
 <body>
-  <a class="visually-hidden" href="#inhalt">Zum Inhalt springen</a>
+  <a class="visually-hidden" href="#content">Zum Inhalt springen</a>
 
+  <!-- ============================== Header ============================== -->
   <header>
     <div class="container nav">
       <a class="brand" href="/" aria-label="Startseite">
-        <span class="logo">F</span>
+        <!-- Minimalist Pro Logo (inline SVG) -->
+        <svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#7c5cff"/>
+              <stop offset="1" stop-color="#5a3dff"/>
+            </linearGradient>
+          </defs>
+          <rect rx="12" width="48" height="48" fill="url(#lg)"/>
+          <path d="M13 30h11M24 30l11-14M13 23h8" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+        </svg>
         <span>fnothing <span class="muted">Signals</span></span>
       </a>
+
       <nav class="navlinks" aria-label="Hauptnavigation">
         <a href="#vorteile">Vorteile</a>
         <a href="#maerkte">Märkte</a>
@@ -174,15 +177,20 @@
     </div>
   </header>
 
-  <main id="inhalt">
-    <!-- Hero -->
+  <!-- =============================== Main =============================== -->
+  <main id="content">
+    <!-- ============================== Hero ============================== -->
     <section class="hero">
+      <div class="hero-art" aria-hidden="true"></div>
       <div class="container stack-lg">
         <div class="stack">
           <span class="badge"><span aria-hidden="true">⚡</span> Reaktionsschnell • Klar • Erweiterbar</span>
           <h1 class="h1">Signale für Krypto, Aktien & mehr – klar strukturiert, bereit für deinen Edge.</h1>
-          <p class="lede">fnothing Signals liefert saubere Setups mit Entry-, SL- und TP-Zonen, damit du schneller entscheiden kannst. Später mit Subscription hinter Paywall – heute schon als stabile Basis für deinen Bot.</p>
-          <div class="cta">
+          <p class="muted" style="max-width:70ch">
+            fnothing Signals liefert saubere Setups mit Entry-, SL- und TP-Zonen, damit du schneller entscheiden kannst.
+            Heute als robuste Basis für deinen Bot – später als Subscription hinter Paywall.
+          </p>
+          <div class="cta" style="display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1.2rem">
             <a class="btn btn-primary" href="#waitlist">Zugang sichern</a>
             <a class="btn btn-ghost" href="#preise">Preise ansehen</a>
 
@@ -201,30 +209,30 @@
       </div>
     </section>
 
-    <!-- Vorteile -->
+    <!-- ============================ Vorteile ============================ -->
     <section id="vorteile">
       <div class="container stack-lg">
         <p class="kicker">Warum fnothing</p>
         <h2 class="h2">Signalqualität & Klarheit, die skaliert</h2>
 
         <div class="grid grid-3">
-          <article class="feature">
-            <div class="icon" aria-hidden="true">①</div>
-            <div>
+          <article class="card">
+            <div class="stack">
+              <div class="badge" aria-hidden="true">①</div>
               <h3 class="h3">Klares Setup-Format</h3>
               <p class="muted">Einheitliche Struktur mit Entry, Stop, Targets & Zeitrahmen – ideal für manuelle wie automatisierte Ausführung.</p>
             </div>
           </article>
-          <article class="feature">
-            <div class="icon" aria-hidden="true">②</div>
-            <div>
+          <article class="card">
+            <div class="stack">
+              <div class="badge" aria-hidden="true">②</div>
               <h3 class="h3">Signal-Kanäle nach Wahl</h3>
               <p class="muted">Webhook/API, E-Mail, Telegram oder Dashboard – du entscheidest, wo die Signale landen.</p>
             </div>
           </article>
-          <article class="feature">
-            <div class="icon" aria-hidden="true">③</div>
-            <div>
+          <article class="card">
+            <div class="stack">
+              <div class="badge" aria-hidden="true">③</div>
               <h3 class="h3">Risikoparameter</h3>
               <p class="muted">Platzhalter für deine spätere Risikosteuerung (PosGröße, R-Multiplikator, Max-DD) – UI ist vorbereitet.</p>
             </div>
@@ -242,7 +250,7 @@
       </div>
     </section>
 
-    <!-- Märkte -->
+    <!-- ============================ Märkte ============================== -->
     <section id="maerkte">
       <div class="container stack-lg">
         <p class="kicker">Abdeckung</p>
@@ -264,7 +272,7 @@
       </div>
     </section>
 
-    <!-- Pricing -->
+    <!-- ============================ Pricing ============================= -->
     <section id="preise">
       <div class="container stack-lg">
         <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
@@ -319,7 +327,7 @@
       </div>
     </section>
 
-    <!-- Waitlist / Lead -->
+    <!-- ============================ Waitlist ============================ -->
     <section id="waitlist">
       <div class="container stack-lg">
         <p class="kicker">Früher Zugang</p>
@@ -328,8 +336,8 @@
           <form class="stack" method="post" action="#" onsubmit="event.preventDefault(); alert('Danke! Wir melden uns per E-Mail.');">
             <label for="email">E-Mail</label>
             <input id="email" name="email" type="email" required
-                   placeholder="dein@email.de"
-                   style="padding:.9rem 1rem; border-radius:12px; border:1px solid var(--line); background:var(--elev); color:var(--text); width:100%;">
+              placeholder="dein@email.de"
+              style="padding:.9rem 1rem; border-radius:12px; border:1px solid var(--line); background:var(--elev); color:var(--text); width:100%;">
             <small class="muted">Wir schicken nur Relevantes zum Produktstart. Kein Spam.</small>
             <div><button class="btn btn-primary" type="submit">Auf die Liste</button></div>
           </form>
@@ -337,7 +345,7 @@
       </div>
     </section>
 
-    <!-- FAQ -->
+    <!-- ============================== FAQ =============================== -->
     <section id="faq">
       <div class="container stack-lg">
         <p class="kicker">FAQ</p>
@@ -363,7 +371,7 @@
       </div>
     </section>
 
-    <!-- Disclaimer -->
+    <!-- =========================== Disclaimer =========================== -->
     <section aria-label="Rechtlicher Hinweis">
       <div class="container card">
         <p class="muted">
@@ -374,16 +382,25 @@
     </section>
   </main>
 
+  <!-- ============================== Footer ============================== -->
   <footer>
     <div class="container foot">
-      <div class="brand">
-        <span class="logo">F</span>
+      <div class="brand" style="gap:.6rem">
+        <svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+          <defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#5a3dff"/></linearGradient></defs>
+          <rect rx="12" width="48" height="48" fill="url(#lg2)"/>
+          <path d="M13 30h11M24 30l11-14M13 23h8" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+        </svg>
         <span>fnothing <span class="muted">Signals</span></span>
       </div>
       <div class="legal">© <span id="year"></span> fnothing. Alle Rechte vorbehalten. · <a class="muted" href="#impressum">Impressum</a> · <a class="muted" href="#agb">AGB</a> · <a class="muted" href="#datenschutz">Datenschutz</a></div>
     </div>
   </footer>
 
+  <noscript><div class="container" style="margin:1rem 0"><div class="card">Bitte aktiviere JavaScript, um alle Funktionen zu nutzen.</div></div></noscript>
+
+  <!-- ========================== Page Scripts ============================ -->
   <script>
     // Jahr im Footer
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -393,7 +410,7 @@
     const tYearly  = document.getElementById('t-yearly');
     const prices   = document.querySelectorAll('[data-price]');
     function setBilling(mode){
-      prices.forEach(el => { el.textContent = el.dataset[mode]; });
+      prices.forEach(el => el.textContent = el.dataset[mode]);
       tMonthly.classList.toggle('active', mode === 'monthly');
       tYearly.classList.toggle('active',  mode === 'yearly');
       tMonthly.setAttribute('aria-selected', mode === 'monthly');
@@ -403,7 +420,7 @@
     tYearly?.addEventListener('click',  () => setBilling('yearly'));
   </script>
 
-  <!-- JSON-LD (Organisation, minimal) -->
+  <!-- JSON-LD (Organisation) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -413,23 +430,15 @@
     "logo": "https://fnothing.com/favicon.svg"
   }
   </script>
-<script>
-  // www → non-www zwingen (https://www.fnothing.com → https://fnothing.com)
-  (function () {
-    if (location.hostname.startsWith('www.')) {
-      location.replace(location.href.replace('//www.', '//'));
-    }
-  })();
-</script>
 
-  <!-- OneSignal v16 (einmal laden & initialisieren) -->
+  <!-- ====================== OneSignal Web Push v16 ====================== -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
-    // Hinweis für iOS, falls nicht als PWA (Standalone) geöffnet
+    // iOS: Hinweis, wenn nicht als PWA (Standalone) geöffnet
     (function(){
       const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-      const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
-      if (isIOS && !isStandalone) {
+      const standalone = navigator.standalone === true || matchMedia('(display-mode: standalone)').matches;
+      if (isIOS && !standalone) {
         const box = document.createElement('div');
         box.style.cssText = "position:fixed;top:12px;left:12px;right:12px;background:#fff;color:#111;padding:12px;border:1px solid #e5e7eb;border-radius:12px;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,.15)";
         box.innerHTML = "<b>iPhone: Push aktivieren</b><br>In <u>Safari</u> öffnen → <em>Teilen</em> → <em>Zum Home-Bildschirm</em>. Danach die App vom Homescreen starten.";
@@ -438,6 +447,7 @@
       }
     })();
 
+    // Hauptintegration
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     window.OneSignalDeferred.push(async function(OneSignal) {
       try {
@@ -452,9 +462,9 @@
         const btn   = document.getElementById("push-btn");
         const state = document.getElementById("push-state");
 
-        async function updateState() {
+        async function updateState(){
           const supported = await OneSignal.Notifications.isPushSupported();
-          const perm      = await OneSignal.Notifications.permission; // default | granted | denied
+          const perm      = await OneSignal.Notifications.permission; // "default" | "granted" | "denied"
           const subId     = await OneSignal.User.pushSubscriptionId;
           state.textContent = `Support: ${supported} · Permission: ${perm} · ID: ${subId || "–"}`;
           if (btn) btn.disabled = (perm === 'denied' || !supported);
@@ -463,23 +473,77 @@
         btn?.addEventListener("click", async () => {
           try {
             const supported = await OneSignal.Notifications.isPushSupported();
-            if (!supported) { alert("Push wird hier nicht unterstützt (z. B. iOS-Browser-Tab). Öffne die PWA vom Homescreen."); return; }
+            if (!supported) {
+              alert("Push wird hier nicht unterstützt (z. B. iOS-Browser-Tab). Öffne die PWA vom Homescreen.");
+              return;
+            }
             if (OneSignal.Slidedown?.promptPush) await OneSignal.Slidedown.promptPush();
             else await OneSignal.Notifications.requestPermission();
             await OneSignal.User.addTag("signals","true");
           } catch (e) {
-            console.error("subscribe error", e);
+            console.warn("subscribe error", e);
             alert("Konnte nicht abonnieren. Siehe Konsole.");
           } finally {
             await updateState();
           }
         });
 
+        // Initiale Diagnose
         await updateState();
+
       } catch (e) {
-        console.error("OneSignal init error", e);
+        console.warn("OneSignal init error", e);
       }
     });
+  </script>
+
+  <!-- =============== Kompaktes Debug-Panel (optional) ================== -->
+  <details class="container" style="margin:1rem 0">
+    <summary class="muted">Diagnose öffnen (Push/Web)</summary>
+    <div class="card" id="diag">Lade…</div>
+    <div class="stack" style="margin-top:.8rem; display:flex; gap:.6rem; flex-wrap:wrap">
+      <button class="btn" id="diag-refresh">Status aktualisieren</button>
+      <button class="btn" id="diag-reset">SW/Cache zurücksetzen</button>
+    </div>
+  </details>
+  <script>
+    (function(){
+      const $ = s => document.querySelector(s);
+      const box = $("#diag");
+      const refresh = async (label="status")=>{
+        try{
+          const isStandalone = navigator.standalone === true || matchMedia('(display-mode: standalone)').matches;
+          const hasSW = 'serviceWorker' in navigator;
+          const hasPushMgr = 'PushManager' in window;
+          const perm = window.Notification ? Notification.permission : "n/a";
+          const OneSignal = window.OneSignal || window.OneSignalDeferred;
+          let osPerm="n/a", subId=null, supported=null;
+          try {
+            osPerm = await window.OneSignal.Notifications.permission;
+            subId  = await window.OneSignal.User.pushSubscriptionId;
+            supported = await window.OneSignal.Notifications.isPushSupported();
+          } catch(_) {}
+          const regs = hasSW ? (await navigator.serviceWorker.getRegistrations()).map(r=>r.scope) : [];
+          box.textContent =
+            `${label}\n`+
+            `display: ${isStandalone?'standalone':'browser'} · SW:${hasSW} · PushMgr:${hasPushMgr} · Notification.permission:${perm}\n`+
+            `OneSignal: supported:${supported} · perm:${osPerm} · subId:${subId||'–'}\n`+
+            `SW scopes: ${regs.join(', ')||'–'}`;
+        }catch(e){ box.textContent = "Diag-Error: "+(e.message||e); }
+      };
+      $("#diag-refresh")?.addEventListener('click',()=>refresh('manual'));
+      $("#diag-reset")?.addEventListener('click', async ()=>{
+        try{
+          const regs = await navigator.serviceWorker.getRegistrations();
+          for(const r of regs) await r.unregister();
+          if (window.caches){ const ks = await caches.keys(); for (const k of ks) await caches.delete(k); }
+          localStorage.clear(); sessionStorage.clear();
+          alert("Zurückgesetzt. Seite neu laden & erneut testen.");
+        }catch(e){ alert(e.message) }
+        refresh('after reset');
+      });
+      refresh('init');
+    })();
   </script>
 </body>
 </html>
