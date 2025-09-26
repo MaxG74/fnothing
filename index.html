@@ -41,6 +41,30 @@
   <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%235a3dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='12' width='48' height='48' fill='url(%23g)'/%3E%3Cpath d='M13 30h11M24 30l11-14M13 23h8' stroke='%23fff' stroke-linecap='round' stroke-width='3'/%3E%3C/svg%3E">
 
+  <!-- ==================== OneSignal Web Push v16 (HEAD) =================== -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    // Head: EINMALIGE Initialisierung via "Custom Code" (OneSignal Dashboard)
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    window.OneSignalDeferred.push(async function (OneSignal) {
+      try {
+        if (location.hostname !== "fnothing.com") {
+          throw new Error("Can only be used on: https://fnothing.com");
+        }
+        await OneSignal.init({
+          appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
+          safari_web_id: "web.onesignal.auto.4bf73218-3550-4659-982d-970270d14d2d",
+          serviceWorkerPath: "/OneSignalSDKWorker.js",
+          serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js",
+          serviceWorkerParam: { scope: "/" },
+          notifyButton: { enable: true } // kleines Glocken-Widget
+        });
+      } catch (e) {
+        console.warn("OneSignal HEAD init error:", e);
+      }
+    });
+  </script>
+
   <style>
     /* --------------------------- Design Tokens --------------------------- */
     :root{
@@ -161,8 +185,8 @@
               <stop offset="1" stop-color="#5a3dff"/>
             </linearGradient>
           </defs>
-          <rect rx="12" width="48" height="48" fill="url(#lg)"/>
-          <path d="M13 30h11M24 30l11-14M13 23h8" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+        <rect rx="12" width="48" height="48" fill="url(#lg)"/>
+        <path d="M13 30h11M24 30l11-14M13 23h8" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
         </svg>
         <span>fnothing <span class="muted">Signals</span></span>
       </a>
@@ -431,8 +455,7 @@
   }
   </script>
 
-  <!-- ====================== OneSignal Web Push v16 ====================== -->
-  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <!-- =============== iOS Hinweis + Push-UI-Logik (kein zweites init!) =============== -->
   <script>
     // iOS: Hinweis, wenn nicht als PWA (Standalone) geöffnet
     (function(){
@@ -447,53 +470,41 @@
       }
     })();
 
-    // Hauptintegration
+    // UI-Logik: nutzt die Head-Initialisierung (kein zweites OneSignal.init!)
     window.OneSignalDeferred = window.OneSignalDeferred || [];
-    window.OneSignalDeferred.push(async function(OneSignal) {
-      try {
-        await OneSignal.init({
-          appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
-          serviceWorkerPath: "/OneSignalSDKWorker.js",
-          serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js",
-          serviceWorkerParam: { scope: "/" },
-          notifyButton: { enable: true }
-        });
+    window.OneSignalDeferred.push(async function (OneSignal) {
+      const btn   = document.getElementById("push-btn");
+      const state = document.getElementById("push-state");
 
-        const btn   = document.getElementById("push-btn");
-        const state = document.getElementById("push-state");
-
-        async function updateState(){
+      async function updateState(){
+        try{
           const supported = await OneSignal.Notifications.isPushSupported();
           const perm      = await OneSignal.Notifications.permission; // "default" | "granted" | "denied"
           const subId     = await OneSignal.User.pushSubscriptionId;
           state.textContent = `Support: ${supported} · Permission: ${perm} · ID: ${subId || "–"}`;
           if (btn) btn.disabled = (perm === 'denied' || !supported);
-        }
-
-        btn?.addEventListener("click", async () => {
-          try {
-            const supported = await OneSignal.Notifications.isPushSupported();
-            if (!supported) {
-              alert("Push wird hier nicht unterstützt (z. B. iOS-Browser-Tab). Öffne die PWA vom Homescreen.");
-              return;
-            }
-            if (OneSignal.Slidedown?.promptPush) await OneSignal.Slidedown.promptPush();
-            else await OneSignal.Notifications.requestPermission();
-            await OneSignal.User.addTag("signals","true");
-          } catch (e) {
-            console.warn("subscribe error", e);
-            alert("Konnte nicht abonnieren. Siehe Konsole.");
-          } finally {
-            await updateState();
-          }
-        });
-
-        // Initiale Diagnose
-        await updateState();
-
-      } catch (e) {
-        console.warn("OneSignal init error", e);
+        }catch(e){ state.textContent = "Push-Status unbekannt"; }
       }
+
+      btn?.addEventListener("click", async () => {
+        try {
+          const supported = await OneSignal.Notifications.isPushSupported();
+          if (!supported) {
+            alert("Push wird hier nicht unterstützt (z. B. iOS-Browser-Tab). Öffne die PWA vom Homescreen.");
+            return;
+          }
+          if (OneSignal.Slidedown?.promptPush) await OneSignal.Slidedown.promptPush();
+          else await OneSignal.Notifications.requestPermission();
+          await OneSignal.User.addTag("signals","true");
+        } catch (e) {
+          console.warn("subscribe error", e);
+          alert("Konnte nicht abonnieren. Siehe Konsole.");
+        } finally {
+          await updateState();
+        }
+      });
+
+      await updateState();
     });
   </script>
 
@@ -516,19 +527,18 @@
           const hasSW = 'serviceWorker' in navigator;
           const hasPushMgr = 'PushManager' in window;
           const perm = window.Notification ? Notification.permission : "n/a";
-          const OneSignal = window.OneSignal || window.OneSignalDeferred;
-          let osPerm="n/a", subId=null, supported=null;
+          let osPerm="n/a", subId=null, supported=null, scopes="–";
           try {
-            osPerm = await window.OneSignal.Notifications.permission;
-            subId  = await window.OneSignal.User.pushSubscriptionId;
-            supported = await window.OneSignal.Notifications.isPushSupported();
+            osPerm   = await window.OneSignal.Notifications.permission;
+            subId    = await window.OneSignal.User.pushSubscriptionId;
+            supported= await window.OneSignal.Notifications.isPushSupported();
+            if (hasSW) scopes = (await navigator.serviceWorker.getRegistrations()).map(r=>r.scope).join(", ");
           } catch(_) {}
-          const regs = hasSW ? (await navigator.serviceWorker.getRegistrations()).map(r=>r.scope) : [];
           box.textContent =
             `${label}\n`+
             `display: ${isStandalone?'standalone':'browser'} · SW:${hasSW} · PushMgr:${hasPushMgr} · Notification.permission:${perm}\n`+
             `OneSignal: supported:${supported} · perm:${osPerm} · subId:${subId||'–'}\n`+
-            `SW scopes: ${regs.join(', ')||'–'}`;
+            `SW scopes: ${scopes}`;
         }catch(e){ box.textContent = "Diag-Error: "+(e.message||e); }
       };
       $("#diag-refresh")?.addEventListener('click',()=>refresh('manual'));
