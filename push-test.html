@@ -1,0 +1,62 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Push Test</title>
+<style>
+  body{font:14px system-ui;margin:24px}
+  button{padding:8px 12px;border-radius:8px;border:1px solid #ccc;background:#f6f7f9;cursor:pointer}
+  pre{background:#0b0b0c;color:#f4f4f5;padding:12px;border-radius:10px;white-space:pre-wrap}
+</style>
+
+<h1>fnothing · Web Push Test</h1>
+<p>1) Klicke zuerst <b>Status aktualisieren</b>. 2) Danach <b>Prompt anzeigen</b>.</p>
+<div style="display:flex;gap:8px;margin:12px 0;">
+  <button id="btn-status">Status aktualisieren</button>
+  <button id="btn-prompt">🔔 Prompt anzeigen</button>
+  <button id="btn-reset">SW/Cache reset</button>
+</div>
+<pre id="out">…</pre>
+
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+const out = document.getElementById('out');
+function log(obj){ out.textContent += (typeof obj==='string'? obj : JSON.stringify(obj,null,2))+"\n"; }
+
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+window.OneSignalDeferred.push(async function(OneSignal) {
+  try{
+    await OneSignal.init({
+      appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
+      serviceWorkerPath: "/OneSignalSDKWorker.js",
+      serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js",
+      serviceWorkerParam: { scope:"/" }
+    });
+
+    async function status(label){
+      const supported = await OneSignal.Notifications.isPushSupported();
+      const perm = await OneSignal.Notifications.permission;
+      const id = await OneSignal.User.pushSubscriptionId;
+      const swRegs = await navigator.serviceWorker.getRegistrations();
+      log({label, supported, permission: perm, subscriptionId: id, swRegs: swRegs.map(r=>r.scope)});
+    }
+
+    document.getElementById('btn-status').onclick = ()=>status('status');
+    document.getElementById('btn-prompt').onclick = async ()=>{
+      try{
+        if (OneSignal.Slidedown?.promptPush) await OneSignal.Slidedown.promptPush();
+        else await OneSignal.Notifications.requestPermission();
+        await OneSignal.User.addTag("signals","true");
+      }catch(e){ log("prompt error: " + (e.message||e)); }
+      await status('after prompt');
+    };
+    document.getElementById('btn-reset').onclick = async ()=>{
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for(const r of regs) await r.unregister();
+      if (window.caches){ const ks = await caches.keys(); for (const k of ks) await caches.delete(k); }
+      localStorage.clear(); sessionStorage.clear();
+      log("Reset done. Seite neu laden.");
+    };
+
+    await status('init');
+  }catch(e){ log("init error: "+(e.message||e)); }
+});
+</script>
