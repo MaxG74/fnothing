@@ -64,12 +64,29 @@ jobs:
           echo "latest preview:"
           head -c 1200 reports/latest.json || true
 
-      # Commit ins Repo (ganzen Ordner adden)
+           # Zeig' im Log, was erzeugt wurde
+      - name: Show generated reports
+        run: |
+          echo "PWD: $(pwd)"
+          ls -la
+          echo "reports/:"
+          ls -la reports || true
+          echo "latest preview:"
+          head -c 1200 reports/latest.json || true
+
+      # Commit ins Repo (erst state.json sicher anlegen, dann getrennt adden)
       - name: Commit reports & dedupe state
         run: |
           git config user.name "fnothing-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add -A reports state.json || true
+
+          # state.json anlegen, falls nicht vorhanden
+          [ -f state.json ] || echo "{}" > state.json
+
+          # getrennt adden, damit ein fehlendes File den anderen Add nicht abbricht
+          git add -A reports
+          git add state.json
+
           if git diff --cached --quiet; then
             echo "No changes."
           else
@@ -77,7 +94,7 @@ jobs:
             git push
           fi
 
-      # Fallback: als Artifact speichern (sichtbar in Actions UI)
+      # (optional) zusätzlich als Artifact hochladen
       - name: Upload reports artifact
         uses: actions/upload-artifact@v4
         with:
