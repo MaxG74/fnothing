@@ -529,6 +529,127 @@
     }
   });
 </script>
+<!-- 🔔 Push-Button (sichtbar) -->
+<button id="enablePush" class="btn btn-primary" style="position:fixed; right:16px; bottom:16px; z-index:9999;">
+  🔔 Push-Benachrichtigungen aktivieren
+</button>
+
+<!-- OneSignal v16 SDK -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+
+<!-- Diagnose-Panel -->
+<div id="push-debug" style="position:fixed;left:12px;bottom:12px;right:auto;z-index:9999;background:#111;color:#fff;padding:10px 12px;border-radius:12px;border:1px solid #333;font:12px system-ui">
+  <b>Push-Diagnose</b>
+  <div id="push-debug-body">Lade…</div>
+  <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+    <button id="btn-os-prompt" class="btn" style="padding:6px 10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff">OneSignal Prompt</button>
+    <button id="btn-native-perm" class="btn" style="padding:6px 10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff">Native Permission testen</button>
+    <button id="btn-clear-sw" class="btn" style="padding:6px 10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff">SW/Cache zurücksetzen</button>
+  </div>
+</div>
+
+<script>
+  // iOS Install-Hinweis (nur wenn nicht als Standalone)
+  (function(){
+    const ua = navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad|ipod/.test(ua);
+    const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+    if (isIOS && !isStandalone) {
+      const box = document.createElement('div');
+      box.style.cssText = "position:fixed;top:12px;left:12px;right:12px;background:#fff;color:#111;padding:12px;border:1px solid #e5e7eb;border-radius:12px;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,.15)";
+      box.innerHTML = "<b>iPhone: Push aktivieren</b><br>In <u>Safari</u> öffnen → <em>Teilen</em> → <em>Zum Home-Bildschirm</em>. Danach die App vom Homescreen starten.";
+      document.body.appendChild(box);
+      setTimeout(()=>box.remove(), 8000);
+    }
+  })();
+
+  // OneSignal initialisieren
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  window.OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
+      notifyButton: { enable: true },
+      serviceWorkerParam: { scope: "/" },
+      serviceWorkerPath: "OneSignalSDKWorker.js",
+      serviceWorkerUpdaterPath: "OneSignalSDKUpdaterWorker.js"
+    });
+
+    const $ = s=>document.querySelector(s);
+    const dbg = $("#push-debug-body");
+
+    async function snapshot(label){
+      const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+      const info = {
+        label,
+        ua: navigator.userAgent,
+        displayMode: isStandalone ? "standalone" : "browser",
+        hasSW: !!('serviceWorker' in navigator),
+        hasPushMgr: !!('PushManager' in window),
+        notifPerm: (window.Notification ? Notification.permission : "n/a"),
+        osSupported: await OneSignal.Notifications.isPushSupported().catch(()=>false),
+        osPerm: await OneSignal.Notifications.permission,
+        osSubId: await OneSignal.User.pushSubscriptionId
+      };
+      dbg.innerHTML = `
+        display: <b>${info.displayMode}</b> · SW:${info.hasSW} · PushMgr:${info.hasPushMgr} ·
+        Notification.permission: <b>${info.notifPerm}</b><br>
+        OneSignal: supported:<b>${info.osSupported}</b> · perm:<b>${info.osPerm}</b> · subId:<code>${info.osSubId||'–'}</code>
+      `;
+      return info;
+    }
+
+    // Initialen Status zeigen
+    await snapshot("init");
+
+    // 🔔 Hauptbutton (unten rechts)
+    document.getElementById("enablePush").addEventListener("click", async () => {
+      try {
+        if (OneSignal.Slidedown?.promptPush) {
+          await OneSignal.Slidedown.promptPush();
+        } else {
+          await OneSignal.Notifications.requestPermission(); // native
+        }
+        await OneSignal.User.addTag("signals","true");
+        const id = await OneSignal.User.pushSubscriptionId;
+        alert("Push aktiviert (oder bereits aktiv). ID: " + (id||"–"));
+      } catch(e) {
+        console.warn(e);
+        alert("Konnte nicht abonnieren. Siehe Diagnose unten.");
+      } finally {
+        await snapshot("after-main-btn");
+      }
+    });
+
+    // Diagnose-Buttons
+    document.getElementById("btn-os-prompt").onclick = async ()=>{
+      try{
+        await OneSignal.Slidedown?.promptPush();
+        await OneSignal.User.addTag("signals","true");
+      }catch(e){console.warn(e)}
+      await snapshot("after-os-prompt");
+    };
+    document.getElementById("btn-native-perm").onclick = async ()=>{
+      try{
+        const res = await Notification.requestPermission();
+        alert("Notification.permission: " + res);
+      }catch(e){alert(e.message)}
+      await snapshot("after-native");
+    };
+    document.getElementById("btn-clear-sw").onclick = async ()=>{
+      try{
+        const regs = await navigator.serviceWorker.getRegistrations();
+        for (const r of regs) await r.unregister();
+        if (window.caches) { const keys = await caches.keys(); for (const k of keys) await caches.delete(k); }
+        localStorage.clear(); sessionStorage.clear();
+        alert("Zurückgesetzt. App beenden & neu starten, dann erneut versuchen.");
+      }catch(e){alert(e.message)}
+      await snapshot("after-clear");
+    };
+
+    // iOS braucht oft einen 2. Start, bis der SW kontrolliert – Status nochmal nach 2s
+    setTimeout(()=>snapshot("2s-later"), 2000);
+  });
+</script>
 
 </body>
 </html>
