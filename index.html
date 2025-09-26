@@ -449,6 +449,37 @@
 
       refreshState();
     });
-  </script>
+  </script><!-- OneSignal Web Push v16 -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  window.OneSignalDeferred.push(async function(OneSignal) {
+    try {
+      await OneSignal.init({
+        appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
+        notifyButton: { enable: true },                 // kleines Glocken-Widget
+        serviceWorkerParam: { scope: "/" },             // wichtig bei GitHub Pages + Root
+        serviceWorkerPath: "OneSignalSDKWorker.js",
+        serviceWorkerUpdaterPath: "OneSignalSDKUpdaterWorker.js"
+        // safari_web_id: "web.onesignal.auto.…"        // nur falls du Safari Push aktiviert hast
+      });
+
+      // Abo anfragen, falls noch nicht "granted"
+      const perm = await OneSignal.Notifications.permission;
+      if (perm !== "granted") {
+        await OneSignal.Notifications.requestPermission(); // Nutzer fragt/erlaubt
+      }
+
+      // Gerät für Signals markieren (Filter in unserem Scanner)
+      await OneSignal.User.addTag("signals", "true");
+
+      // Debug: User/Subscription-ID in der Konsole
+      console.log("OneSignal ID:", await OneSignal.User.pushSubscriptionId);
+    } catch (e) {
+      console.warn("OneSignal init error", e);
+    }
+  });
+</script>
+
 </body>
 </html>
