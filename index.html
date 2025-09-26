@@ -480,6 +480,55 @@
     }
   });
 </script>
+<!-- Button ins Hero oder Footer packen -->
+<button id="enablePush" class="btn btn-primary" style="position:fixed; right:16px; bottom:16px; z-index:9999;">
+  🔔 Push-Benachrichtigungen aktivieren
+</button>
+
+<!-- OneSignal v16 -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  window.OneSignalDeferred.push(async function(OneSignal) {
+    try {
+      await OneSignal.init({
+        appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
+        notifyButton: { enable: true },                  // kleine Glocke
+        serviceWorkerParam: { scope: "/" },
+        serviceWorkerPath: "OneSignalSDKWorker.js",
+        serviceWorkerUpdaterPath: "OneSignalSDKUpdaterWorker.js"
+      });
+
+      // Status anzeigen (optional)
+      const log = async (label) => {
+        const perm = await OneSignal.Notifications.permission; // "default" | "granted" | "denied"
+        const subId = await OneSignal.User.pushSubscriptionId;
+        console.log(label, { perm, subId });
+      };
+      await log("init");
+
+      // Button klick → Prompt
+      document.getElementById("enablePush").addEventListener("click", async () => {
+        try {
+          // OneSignal Slidedown oder direkt Permission anfragen
+          if (OneSignal.Slidedown?.promptPush) {
+            await OneSignal.Slidedown.promptPush();
+          } else {
+            await OneSignal.Notifications.requestPermission();
+          }
+          await OneSignal.User.addTag("signals", "true"); // wichtig für unsere Filter
+          await log("after request");
+          alert("Push aktiviert (oder bereits aktiv).");
+        } catch (e) {
+          console.warn("push enable error", e);
+          alert("Konnte nicht abonnieren. Siehe Konsole.");
+        }
+      });
+    } catch (e) {
+      console.warn("OneSignal init error", e);
+    }
+  });
+</script>
 
 </body>
 </html>
