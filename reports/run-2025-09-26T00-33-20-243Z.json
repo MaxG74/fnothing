@@ -1,0 +1,1672 @@
+{
+  "startedAt": "2025-09-26T00:31:45.324Z",
+  "items": [
+    {
+      "type": "stock",
+      "symbol": "MSFT",
+      "features": {
+        "price": 507.0299987792969,
+        "sma20": 506.9660018920898,
+        "sma50": 512.1066003417968,
+        "sma200": 449.88469970703125,
+        "macdLine": 0.46395686220949983,
+        "macdSignal": -0.029024161590354897,
+        "rsi14": 48.261688225997254,
+        "bbUpper": 518.5664569247235,
+        "bbLower": 495.3655468594561,
+        "proximityHi": -5.341276806572891,
+        "proximityLo": 43.0025954057342,
+        "volSpike": 0.771118133671598,
+        "slope50": 0.023163390417965505,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 35
+    },
+    {
+      "type": "stock",
+      "symbol": "AAPL",
+      "features": {
+        "price": 256.8699951171875,
+        "sma20": 239.61949920654297,
+        "sma50": 227.54179931640624,
+        "sma200": 221.91050003051757,
+        "macdLine": 7.26554854860467,
+        "macdSignal": 5.615926085407594,
+        "rsi14": 71.93820771268025,
+        "bbUpper": 257.0601910912096,
+        "bbLower": 222.17880732187632,
+        "proximityHi": -0.8300494122756262,
+        "proximityLo": 48.97923549766777,
+        "volSpike": 0.9056043998251445,
+        "slope50": 0.7164300887311091,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 65,
+      "error": "Error: OpenAI 429"
+    },
+    {
+      "type": "stock",
+      "symbol": "AMZN",
+      "features": {
+        "price": 218.14999389648438,
+        "sma20": 229.4479995727539,
+        "sma50": 227.46579956054688,
+        "sma200": 214.78760009765625,
+        "macdLine": -1.2385378423873874,
+        "macdSignal": 0.5443969853866413,
+        "rsi14": 37.0692130830536,
+        "bbUpper": 239.75772844849604,
+        "bbLower": 219.13827069701176,
+        "proximityHi": -9.877717881213169,
+        "proximityLo": 30.378905299574555,
+        "volSpike": 1.172738378607511,
+        "slope50": 0.09914807751298646,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 25
+    },
+    {
+      "type": "stock",
+      "symbol": "NVDA",
+      "features": {
+        "price": 177.69000244140625,
+        "sma20": 174.91749954223633,
+        "sma50": 176.45879974365235,
+        "sma200": 141.64305000305177,
+        "macdLine": 0.8759093086073904,
+        "macdSignal": 0.5452155387302395,
+        "rsi14": 52.61480457387705,
+        "bbUpper": 183.29627625397978,
+        "bbLower": 166.53872283049287,
+        "proximityHi": -3.224224252092048,
+        "proximityLo": 88.41056838222208,
+        "volSpike": 0.9986478297255867,
+        "slope50": 0.19932451091828893,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 60,
+      "error": "Error: OpenAI 429"
+    },
+    {
+      "type": "stock",
+      "symbol": "GOOGL",
+      "features": {
+        "price": 245.7899932861328,
+        "sma20": 239.2020004272461,
+        "sma50": 214.11619995117186,
+        "sma200": 184.67330009460449,
+        "macdLine": 11.4019031745853,
+        "macdSignal": 12.310484711683447,
+        "rsi14": 67.65290225464679,
+        "bbUpper": 266.19796913737383,
+        "bbLower": 212.20603171711838,
+        "proximityHi": -3.505813399723123,
+        "proximityLo": 69.86178194188183,
+        "volSpike": 0.7604900085527471,
+        "slope50": 1.350357084070255,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 50
+    },
+    {
+      "type": "stock",
+      "symbol": "META",
+      "features": {
+        "price": 748.9099731445312,
+        "sma20": 757.3859985351562,
+        "sma50": 750.2007971191406,
+        "sma200": 663.9176998901368,
+        "macdLine": 3.503014354640186,
+        "macdSignal": 5.108216935648647,
+        "rsi14": 45.89096325417734,
+        "bbUpper": 783.978344836563,
+        "bbLower": 730.7936522337494,
+        "proximityHi": -5.201269222211234,
+        "proximityLo": 54.522751513584595,
+        "volSpike": 0.9815813747953999,
+        "slope50": 0.9606359415565738,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 25
+    },
+    {
+      "type": "stock",
+      "symbol": "AVGO",
+      "features": {
+        "price": 336.1000061035156,
+        "sma20": 336.63700408935546,
+        "sma50": 312.41920288085936,
+        "sma200": 242.51075004577638,
+        "macdLine": 9.822289686925387,
+        "macdSignal": 12.637020366532518,
+        "rsi14": 53.89904072487176,
+        "bbUpper": 380.6670327872835,
+        "bbLower": 292.6069753914274,
+        "proximityHi": -9.056471184724778,
+        "proximityLo": 129.74914315986598,
+        "volSpike": 0.7021304852906203,
+        "slope50": 1.3345128014075092,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 50
+    },
+    {
+      "type": "stock",
+      "symbol": "TSLA",
+      "features": {
+        "price": 423.3855895996094,
+        "sma20": 383.26277923583984,
+        "sma50": 349.5425109863281,
+        "sma200": 334.21677772521974,
+        "macdLine": 26.339920670488425,
+        "macdSignal": 22.216075799884607,
+        "rsi14": 65.5587497493648,
+        "bbUpper": 464.54663625754495,
+        "bbLower": 301.97892221413474,
+        "proximityHi": -11.768932079339345,
+        "proximityLo": 90.83457515318109,
+        "volSpike": 1.036287576014783,
+        "slope50": 1.8483904059246605,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 60,
+      "error": "Error: OpenAI 429"
+    },
+    {
+      "type": "stock",
+      "symbol": "LLY",
+      "features": {
+        "price": 714.5900268554688,
+        "sma20": 745.4770050048828,
+        "sma50": 735.8856030273438,
+        "sma200": 784.3807998657227,
+        "macdLine": 3.096831424815946,
+        "macdSignal": 6.010182831795366,
+        "rsi14": 39.7601942539071,
+        "bbUpper": 770.8676907046216,
+        "bbLower": 720.086319305144,
+        "proximityHi": -23.139219402263524,
+        "proximityLo": 14.215615595108602,
+        "volSpike": 1.564455888150793,
+        "slope50": -0.8364875982125024,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "BRK.B",
+      "features": {
+        "price": 494.9599914550781,
+        "sma20": 495.87249755859375,
+        "sma50": 484.7121990966797,
+        "sma200": 489.61329956054686,
+        "macdLine": 2.1028177027766333,
+        "macdSignal": 2.6496999184684213,
+        "rsi14": 54.567602537462626,
+        "bbUpper": 505.0324294135379,
+        "bbLower": 486.7125657036496,
+        "proximityHi": -8.306779798425682,
+        "proximityLo": 11.814934116543835,
+        "volSpike": 0.9632812611415901,
+        "slope50": 0.4476792869981244,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 50
+    },
+    {
+      "type": "stock",
+      "symbol": "TSM",
+      "features": {
+        "price": 276.6600036621094,
+        "sma20": 255.8390007019043,
+        "sma50": 245.5840008544922,
+        "sma200": 206.79049995422363,
+        "macdLine": 10.587301711835437,
+        "macdSignal": 8.29640071289551,
+        "rsi14": 69.60646771756124,
+        "bbUpper": 288.776395127063,
+        "bbLower": 222.9016062767456,
+        "proximityHi": -2.139997869134412,
+        "proximityLo": 95.69923832336157,
+        "volSpike": 0.9556381523400166,
+        "slope50": 0.5467321524655829,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 60,
+      "error": "Error: OpenAI 429"
+    },
+    {
+      "type": "stock",
+      "symbol": "JPM",
+      "features": {
+        "price": 313.45001220703125,
+        "sma20": 305.67850494384766,
+        "sma50": 298.2958013916016,
+        "sma200": 266.4368002319336,
+        "macdLine": 5.119297163622093,
+        "macdSignal": 4.5819747560275035,
+        "rsi14": 67.21923653577423,
+        "bbUpper": 319.18312945612826,
+        "bbLower": 292.17388043156706,
+        "proximityHi": -0.42251304956580943,
+        "proximityLo": 49.06316056051451,
+        "volSpike": 0.8322140036940903,
+        "slope50": 0.37945940929772165,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 75,
+      "error": "Error: OpenAI 429"
+    },
+    {
+      "type": "stock",
+      "symbol": "MA",
+      "features": {
+        "price": 567.2999877929688,
+        "sma20": 584.9344909667968,
+        "sma50": 577.831796875,
+        "sma200": 554.9846505737305,
+        "macdLine": -2.0425247152772954,
+        "macdSignal": 0.9239846630049984,
+        "rsi14": 39.10699402433207,
+        "bbUpper": 601.8511038937419,
+        "bbLower": 568.0178780398518,
+        "proximityHi": -5.285834282464489,
+        "proximityLo": 18.2071953493125,
+        "volSpike": 1.004642343676282,
+        "slope50": 0.5836574341396916,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 25
+    },
+    {
+      "type": "stock",
+      "symbol": "V",
+      "features": {
+        "price": 334.92999267578125,
+        "sma20": 343.2929946899414,
+        "sma50": 344.8569970703125,
+        "sma200": 342.0222489929199,
+        "macdLine": -2.0961054805311505,
+        "macdSignal": -1.4942003805721435,
+        "rsi14": 40.495141610275795,
+        "bbUpper": 353.2976510954238,
+        "bbLower": 333.288338284459,
+        "proximityHi": -10.281001080553294,
+        "proximityLo": 9.525835855341484,
+        "volSpike": 0.9358969837283172,
+        "slope50": -0.2224304716465837,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "UNH",
+      "features": {
+        "price": 345.55999755859375,
+        "sma20": 333.14150085449216,
+        "sma50": 299.53220031738283,
+        "sma200": 407.2760997009277,
+        "macdLine": 13.071385663984415,
+        "macdSignal": 13.679383993537986,
+        "rsi14": 63.24628679348965,
+        "bbUpper": 367.9311465331158,
+        "bbLower": 298.35185517586854,
+        "proximityHi": -44.73250738766993,
+        "proximityLo": 45.33372223126014,
+        "volSpike": 0.5851529726401861,
+        "slope50": 1.1047577251954754,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 20
+    },
+    {
+      "type": "stock",
+      "symbol": "XOM",
+      "features": {
+        "price": 115.58999633789062,
+        "sma20": 112.91800003051758,
+        "sma50": 110.58919998168945,
+        "sma200": 109.40305019378663,
+        "macdLine": 1.1049040925695266,
+        "macdSignal": 0.9453174495636574,
+        "rsi14": 61.85487362485796,
+        "bbUpper": 116.31800808736695,
+        "bbLower": 109.5179919736682,
+        "proximityHi": -5.199707989352011,
+        "proximityLo": 15.670965660853449,
+        "volSpike": 0.9240246872304421,
+        "slope50": 0.031022750884170298,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 60
+    },
+    {
+      "type": "stock",
+      "symbol": "NVO",
+      "features": {
+        "price": 56.040000915527344,
+        "sma20": 56.92399997711182,
+        "sma50": 56.38019981384277,
+        "sma200": 72.21980016708375,
+        "macdLine": 0.747214720640649,
+        "macdSignal": 0.4991555143054925,
+        "rsi14": 46.12462727415428,
+        "bbUpper": 61.596402164562996,
+        "bbLower": 52.25159778966064,
+        "proximityHi": -49.82540989295213,
+        "proximityLo": 23.490523570970137,
+        "volSpike": 1.3404631179775566,
+        "slope50": -0.2101619907007114,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "JNJ",
+      "features": {
+        "price": 177.72999572753906,
+        "sma20": 176.99649963378906,
+        "sma50": 173.83859954833986,
+        "sma200": 159.08315017700195,
+        "macdLine": 0.7108181650557981,
+        "macdSignal": 1.0998838261735413,
+        "rsi14": 55.946480061707945,
+        "bbUpper": 179.5894190322503,
+        "bbLower": 174.4035802353278,
+        "proximityHi": -0.8700973936142191,
+        "proximityLo": 25.10910796984418,
+        "volSpike": 1.024977009758324,
+        "slope50": 0.38731705352113327,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 65,
+      "error": "Error: OpenAI 429"
+    },
+    {
+      "type": "stock",
+      "symbol": "ASML",
+      "features": {
+        "price": 949.5499877929688,
+        "sma20": 840.6084991455078,
+        "sma50": 773.4914001464844,
+        "sma200": 738.4449011230469,
+        "macdLine": 53.982945220801184,
+        "macdSignal": 41.54394108567072,
+        "rsi14": 76.89664040082617,
+        "bbUpper": 1001.3745844109231,
+        "bbLower": 679.8424138800925,
+        "proximityHi": -1.4488715043087141,
+        "proximityLo": 59.48905648261087,
+        "volSpike": 0.7624933902359742,
+        "slope50": 2.238790121075841,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 65,
+      "error": "Error: OpenAI 429"
+    },
+    {
+      "type": "stock",
+      "symbol": "PG",
+      "features": {
+        "price": 152.14999389648438,
+        "sma20": 156.95600051879882,
+        "sma50": 156.02239990234375,
+        "sma200": 162.96900009155274,
+        "macdLine": -0.954111437823542,
+        "macdSignal": -0.14830690950743441,
+        "rsi14": 36.855423222008966,
+        "bbUpper": 161.95940364203204,
+        "bbLower": 151.9525973955656,
+        "proximityHi": -15.331109359836471,
+        "proximityLo": 1.1164967516130386,
+        "volSpike": 1.0470810916433542,
+        "slope50": -0.0017085163087836868,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "AMD",
+      "features": {
+        "price": 161.27000427246094,
+        "sma20": 159.42650146484374,
+        "sma50": 165.38919982910156,
+        "sma200": 127.03694988250733,
+        "macdLine": -0.9646228606991656,
+        "macdSignal": -1.387233462683489,
+        "rsi14": 50.56897305702489,
+        "bbUpper": 167.1009642449655,
+        "bbLower": 151.75203868472198,
+        "proximityHi": -12.552865267505803,
+        "proximityLo": 106.20126091329736,
+        "volSpike": 0.8276140713689927,
+        "slope50": 0.17308500967743856,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 45
+    },
+    {
+      "type": "stock",
+      "symbol": "ORCL",
+      "features": {
+        "price": 291.3299865722656,
+        "sma20": 276.83049697875975,
+        "sma50": 257.810598449707,
+        "sma200": 190.88674980163574,
+        "macdLine": 17.92516136106167,
+        "macdSignal": 16.649206672775254,
+        "rsi14": 54.763525428224945,
+        "bbUpper": 353.7275003712728,
+        "bbLower": 199.9334935862467,
+        "proximityHi": -11.269150401483746,
+        "proximityLo": 137.20077128818184,
+        "volSpike": 1.0885920873410508,
+        "slope50": 1.0181210720595402,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 60
+    },
+    {
+      "type": "stock",
+      "symbol": "COST",
+      "features": {
+        "price": 943.3099975585938,
+        "sma20": 954.5015014648437,
+        "sma50": 956.6089990234375,
+        "sma200": 975.734499206543,
+        "macdLine": -4.460501550883123,
+        "macdSignal": -2.7974965595701953,
+        "rsi14": 42.863731036172595,
+        "bbUpper": 976.1387064377737,
+        "bbLower": 932.8642964919137,
+        "proximityHi": -12.401796854710753,
+        "proximityLo": 5.91610369520991,
+        "volSpike": 1.4085582435772728,
+        "slope50": -0.22762986904185625,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "WMT",
+      "features": {
+        "price": 103.05000305175781,
+        "sma20": 101.56850051879883,
+        "sma50": 99.97660018920898,
+        "sma200": 95.91410018920898,
+        "macdLine": 1.0136738914220729,
+        "macdSignal": 1.019773600148761,
+        "rsi14": 57.82714155559411,
+        "bbUpper": 106.12734667723461,
+        "bbLower": 97.00965436036304,
+        "proximityHi": -1.9038552516886706,
+        "proximityLo": 25.993400046770734,
+        "volSpike": 0.8337998243772371,
+        "slope50": 0.11677162655859263,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 50
+    },
+    {
+      "type": "stock",
+      "symbol": "NFLX",
+      "features": {
+        "price": 1208.239990234375,
+        "sma20": 1222.6499877929687,
+        "sma50": 1210.0367919921875,
+        "sma200": 1086.0570474243164,
+        "macdLine": -1.8112353721835461,
+        "macdSignal": 0.15616685770690786,
+        "rsi14": 47.24264977598898,
+        "bbUpper": 1262.9259706357068,
+        "bbLower": 1182.3740049502305,
+        "proximityHi": -9.774257478450847,
+        "proximityLo": 51.9722307842009,
+        "volSpike": 0.6847775027458773,
+        "slope50": -0.43091849718997466,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 20
+    },
+    {
+      "type": "stock",
+      "symbol": "CRM",
+      "features": {
+        "price": 240.9499969482422,
+        "sma20": 247.3650001525879,
+        "sma50": 249.8168002319336,
+        "sma200": 282.7273504638672,
+        "macdLine": -1.5996293898041358,
+        "macdSignal": -1.580425798017056,
+        "rsi14": 43.54277682936876,
+        "bbUpper": 257.7418755669679,
+        "bbLower": 236.98812473820792,
+        "proximityHi": -34.50131836071982,
+        "proximityLo": 4.010184381971628,
+        "volSpike": 0.7608928752457426,
+        "slope50": -0.43259292394792276,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "LIN",
+      "features": {
+        "price": 473.7799987792969,
+        "sma20": 476.1675033569336,
+        "sma50": 474.09020263671874,
+        "sma200": 457.46309982299806,
+        "macdLine": 0.4050092895607236,
+        "macdSignal": 0.8278995070232956,
+        "rsi14": 47.372539915282566,
+        "bbUpper": 483.9683499987482,
+        "bbLower": 468.366656715119,
+        "proximityHi": -2.028577438094765,
+        "proximityLo": 14.741709955518141,
+        "volSpike": 0.8478835516893635,
+        "slope50": 0.19625930383358442,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 25
+    },
+    {
+      "type": "stock",
+      "symbol": "PEP",
+      "features": {
+        "price": 139.9199981689453,
+        "sma20": 143.62349853515624,
+        "sma50": 144.61959899902342,
+        "sma200": 143.17574935913086,
+        "macdLine": -1.1993886267009088,
+        "macdSignal": -0.8400826535373047,
+        "rsi14": 40.28725893053322,
+        "bbUpper": 149.8602222815959,
+        "bbLower": 137.3867747887166,
+        "proximityHi": -15.27701886768047,
+        "proximityLo": 9.295417512374076,
+        "volSpike": 0.8857028747648154,
+        "slope50": 0.12005721058041297,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "KO",
+      "features": {
+        "price": 65.9800033569336,
+        "sma20": 67.353999710083,
+        "sma50": 68.69139968872071,
+        "sma200": 68.48254985809326,
+        "macdLine": -0.7956721849770787,
+        "macdSignal": -0.7439452601057791,
+        "rsi14": 34.85406132222646,
+        "bbUpper": 69.34615759031908,
+        "bbLower": 65.36184182984692,
+        "proximityHi": -10.717182686622575,
+        "proximityLo": 8.50189420635887,
+        "volSpike": 0.7699764281468204,
+        "slope50": -0.06153098464376497,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "BAC",
+      "features": {
+        "price": 51.849998474121094,
+        "sma20": 50.87550029754639,
+        "sma50": 48.8931999206543,
+        "sma200": 45.054750022888186,
+        "macdLine": 0.887158171191011,
+        "macdSignal": 0.883375338150606,
+        "rsi14": 65.9177625392197,
+        "bbUpper": 52.46285602544233,
+        "bbLower": 49.28814456965045,
+        "proximityHi": -0.7655531595768541,
+        "proximityLo": 50.77057107982446,
+        "volSpike": 0.6154826609860149,
+        "slope50": 0.08645235195726976,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 75,
+      "error": "Error: OpenAI 429"
+    },
+    {
+      "type": "stock",
+      "symbol": "ABBV",
+      "features": {
+        "price": 218.5399932861328,
+        "sma20": 216.0469985961914,
+        "sma50": 205.27119995117187,
+        "sma200": 192.65185005187988,
+        "macdLine": 4.490662337161268,
+        "macdSignal": 4.764626155094856,
+        "rsi14": 60.66773159601448,
+        "bbUpper": 225.80655674539182,
+        "bbLower": 206.28744044699098,
+        "proximityHi": -1.8283128848926884,
+        "proximityLo": 32.456504036656604,
+        "volSpike": 1.2554100015115328,
+        "slope50": 0.6420230243298107,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 50
+    },
+    {
+      "type": "stock",
+      "symbol": "MRK",
+      "features": {
+        "price": 77.5999984741211,
+        "sma20": 82.51799964904785,
+        "sma50": 82.48400009155273,
+        "sma200": 86.31849990844727,
+        "macdLine": -1.0708528402964532,
+        "macdSignal": -0.47172311591015503,
+        "rsi14": 30.258887120761344,
+        "bbUpper": 86.74602026603456,
+        "bbLower": 78.28997903206114,
+        "proximityHi": -25.233646989483873,
+        "proximityLo": 5.621338212601222,
+        "volSpike": 1.184690245853559,
+        "slope50": 0.008327309241987792,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "ADBE",
+      "features": {
+        "price": 354.1600036621094,
+        "sma20": 354.4704986572266,
+        "sma50": 355.5509979248047,
+        "sma200": 397.8515995788574,
+        "macdLine": 0.9177603264182039,
+        "macdSignal": 0.4038280683612867,
+        "rsi14": 48.07634139799377,
+        "bbUpper": 367.82779871636575,
+        "bbLower": 341.1131985980874,
+        "proximityHi": -35.95196947535884,
+        "proximityLo": 6.147163237170109,
+        "volSpike": 0.5877743075785903,
+        "slope50": -0.3150791737396673,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "INTC",
+      "features": {
+        "price": 33.9900016784668,
+        "sma20": 26.3685001373291,
+        "sma50": 23.89220001220703,
+        "sma200": 21.94074996948242,
+        "macdLine": 2.0947018592064666,
+        "macdSignal": 1.3473973499324248,
+        "rsi14": 78.3707109913076,
+        "bbUpper": 32.2210562998376,
+        "bbLower": 20.5159439748206,
+        "proximityHi": 0,
+        "proximityLo": 87.47933398707106,
+        "volSpike": 2.5926247124108284,
+        "slope50": 0.10955960522031877,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 75,
+      "error": "Error: OpenAI 429"
+    },
+    {
+      "type": "stock",
+      "symbol": "TXN",
+      "features": {
+        "price": 182.0399932861328,
+        "sma20": 186.22049865722656,
+        "sma50": 191.5352001953125,
+        "sma200": 187.13330032348634,
+        "macdLine": -3.81560436282777,
+        "macdSignal": -3.9289803312658753,
+        "rsi14": 40.639563690027856,
+        "bbUpper": 201.77095837450042,
+        "bbLower": 170.6700389399527,
+        "proximityHi": -17.72203693282133,
+        "proximityLo": 25.018880930621606,
+        "volSpike": 0.5245379772288014,
+        "slope50": -0.5416688542261359,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "SAP",
+      "features": {
+        "price": 262.510009765625,
+        "sma20": 265.47300186157224,
+        "sma50": 277.1724008178711,
+        "sma200": 277.8575493621826,
+        "macdLine": -3.446179042865481,
+        "macdSignal": -4.652727385969802,
+        "rsi14": 43.51689028492285,
+        "bbUpper": 278.14836048561335,
+        "bbLower": 252.79764323753113,
+        "proximityHi": -15.843293069135283,
+        "proximityLo": 14.979638462066962,
+        "volSpike": 0.5916609647031513,
+        "slope50": -0.8595893001317911,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "NKE",
+      "features": {
+        "price": 69.23999786376953,
+        "sma20": 73.33299980163574,
+        "sma50": 74.94459976196289,
+        "sma200": 70.05089981079101,
+        "macdLine": -1.3139360106167288,
+        "macdSignal": -0.8827659147495461,
+        "rsi14": 29.279686710157975,
+        "bbUpper": 77.516124300691,
+        "bbLower": 69.14987530258047,
+        "proximityHi": -15.271663204248561,
+        "proximityLo": 29.979345351551167,
+        "volSpike": 1.0465603003501192,
+        "slope50": -0.033546812582691696,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "PFE",
+      "features": {
+        "price": 23.600000381469727,
+        "sma20": 24.353499984741212,
+        "sma50": 24.56799991607666,
+        "sma200": 24.826850004196167,
+        "macdLine": -0.23907110764761796,
+        "macdSignal": -0.17903459022927903,
+        "rsi14": 37.139427083586334,
+        "bbUpper": 25.153531730633446,
+        "bbLower": 23.55346823884898,
+        "proximityHi": -14.056805650753201,
+        "proximityLo": 9.30986667288609,
+        "volSpike": 1.2010565192704106,
+        "slope50": -0.014539596311712834,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "CSCO",
+      "features": {
+        "price": 67.8499984741211,
+        "sma20": 67.7234992980957,
+        "sma50": 68.12519973754883,
+        "sma200": 63.32134979248047,
+        "macdLine": -0.08921647863388671,
+        "macdSignal": -0.12981860572713055,
+        "rsi14": 50.54684556702596,
+        "bbUpper": 69.17098362971177,
+        "bbLower": 66.27601496647964,
+        "proximityHi": -5.488232889204593,
+        "proximityLo": 27.561572148736047,
+        "volSpike": 1.1802503989482038,
+        "slope50": -0.019061696486328668,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 40
+    },
+    {
+      "type": "stock",
+      "symbol": "GE",
+      "features": {
+        "price": 297.17999267578125,
+        "sma20": 286.72899932861327,
+        "sma50": 276.33119873046877,
+        "sma200": 224.36909996032716,
+        "macdLine": 7.922857879379137,
+        "macdSignal": 6.725360532936793,
+        "rsi14": 63.36094378938675,
+        "bbUpper": 307.09101419557066,
+        "bbLower": 266.3669844616559,
+        "proximityHi": -2.764784894163527,
+        "proximityLo": 85.79556007865693,
+        "volSpike": 1.0038895735219857,
+        "slope50": 0.6966457361643698,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 60
+    },
+    {
+      "type": "stock",
+      "symbol": "IBM",
+      "features": {
+        "price": 281.44000244140625,
+        "sma20": 257.49399719238284,
+        "sma50": 254.85479888916015,
+        "sma200": 252.0430994415283,
+        "macdLine": 6.053788414535404,
+        "macdSignal": 3.3259828200109194,
+        "rsi14": 73.53392491796404,
+        "bbUpper": 278.4794050052058,
+        "bbLower": 236.50858937955985,
+        "proximityHi": -4.525407555849249,
+        "proximityLo": 37.294499682713365,
+        "volSpike": 2.420824924091174,
+        "slope50": -0.514882601615819,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 55
+    },
+    {
+      "type": "stock",
+      "symbol": "NOW",
+      "features": {
+        "price": 918.6099853515625,
+        "sma20": 930.9575012207031,
+        "sma50": 920.8587976074218,
+        "sma200": 960.2316485595703,
+        "macdLine": 6.060196384487881,
+        "macdSignal": 6.674386616305629,
+        "rsi14": 47.63401175315177,
+        "bbUpper": 961.0620035626465,
+        "bbLower": 900.8529988787596,
+        "proximityHi": -21.512489524485975,
+        "proximityLo": 27.293002740132923,
+        "volSpike": 0.7641197582578199,
+        "slope50": -1.2460502639350775,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "AMAT",
+      "features": {
+        "price": 199.60000610351562,
+        "sma20": 174.63250045776368,
+        "sma50": 177.30440032958984,
+        "sma200": 168.80810028076172,
+        "macdLine": 7.581929963818681,
+        "macdSignal": 3.2681191745981573,
+        "rsi14": 74.00602884819452,
+        "bbUpper": 206.2224049241827,
+        "bbLower": 143.04259599134465,
+        "proximityHi": -0.9134215228307659,
+        "proximityLo": 57.227263412139365,
+        "volSpike": 0.6975796734592719,
+        "slope50": -0.35883965859250183,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 60
+    },
+    {
+      "type": "stock",
+      "symbol": "QCOM",
+      "features": {
+        "price": 169.67999267578125,
+        "sma20": 163.32050018310548,
+        "sma50": 158.21759979248046,
+        "sma200": 156.1285004043579,
+        "macdLine": 3.648982225357287,
+        "macdSignal": 2.8088100359600396,
+        "rsi14": 63.88596499742765,
+        "bbUpper": 172.48738526021387,
+        "bbLower": 154.1536151059971,
+        "proximityHi": -3.5141634897768457,
+        "proximityLo": 36.114220833571,
+        "volSpike": 1.0030076333383298,
+        "slope50": 0.1676156974892114,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 60
+    },
+    {
+      "type": "stock",
+      "symbol": "SPY",
+      "features": {
+        "price": 658.0499877929688,
+        "sma20": 654.8,
+        "sma50": 643.7003979492188,
+        "sma200": 599.5741506958008,
+        "macdLine": 5.967654134937902,
+        "macdSignal": 6.229309368848961,
+        "rsi14": 57.73619393967971,
+        "bbUpper": 669.7265462001766,
+        "bbLower": 639.8734537998233,
+        "proximityHi": -1.3181630838733616,
+        "proximityLo": 32.5430980565882,
+        "volSpike": 1.1843616719993442,
+        "slope50": 0.7074614316829546,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 65,
+      "error": "Error: OpenAI 429"
+    },
+    {
+      "type": "stock",
+      "symbol": "SMH",
+      "features": {
+        "price": 321.05999755859375,
+        "sma20": 304.3489990234375,
+        "sma50": 296.9421990966797,
+        "sma200": 254.6061499786377,
+        "macdLine": 7.745650007964912,
+        "macdSignal": 5.9211284032389955,
+        "rsi14": 72.90109515433146,
+        "bbUpper": 328.01827913474756,
+        "bbLower": 280.67971891212744,
+        "proximityHi": -0.34454350897856345,
+        "proximityLo": 78.41622839868016,
+        "volSpike": 1.083526562422205,
+        "slope50": 0.47438483125602393,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 65,
+      "error": "Error: OpenAI 429"
+    },
+    {
+      "type": "stock",
+      "symbol": "QQQ",
+      "features": {
+        "price": 593.530029296875,
+        "sma20": 585.1420013427735,
+        "sma50": 575.1746020507812,
+        "sma200": 525.4206498718262,
+        "macdLine": 7.315661673673958,
+        "macdSignal": 6.7373207993994,
+        "rsi14": 61.5583970497156,
+        "bbUpper": 606.1917881983472,
+        "bbLower": 564.0922144871997,
+        "proximityHi": -1.4397181558301901,
+        "proximityLo": 42.654913421059696,
+        "volSpike": 1.305496717998378,
+        "slope50": 0.6789363656517001,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 75,
+      "error": "Error: OpenAI 429"
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:BTCUSDT",
+      "features": {
+        "price": 109400.8359375,
+        "sma20": 110642.73046875,
+        "sma50": 111988.6484375,
+        "sma200": 114397.52703125,
+        "macdLine": -847.2173980381194,
+        "macdSignal": -744.7514047792108,
+        "rsi14": 33.99717690525563,
+        "bbUpper": 112771.47459678857,
+        "bbLower": 108513.98634071143,
+        "proximityHi": -7.178842887644451,
+        "proximityLo": 0.4261941745191564,
+        "slope50": -44.81588396950542,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 0
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:SOLUSDT",
+      "features": {
+        "price": 195.33338928222656,
+        "sma20": 199.91832275390624,
+        "sma50": 206.94615844726562,
+        "sma200": 228.05900283813477,
+        "macdLine": -3.513850877904048,
+        "macdSignal": -3.4284709814909298,
+        "rsi14": 34.277997962075474,
+        "bbUpper": 206.59398698086594,
+        "bbLower": 193.24265852694654,
+        "proximityHi": -22.26119340354745,
+        "proximityLo": 0.29432452806773407,
+        "slope50": -0.37096279618076966,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 0
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:ETHUSDT",
+      "features": {
+        "price": 3912.043701171875,
+        "sma20": 3960.41240234375,
+        "sma50": 4077.563837890625,
+        "sma200": 4333.484509277344,
+        "macdLine": -52.388103423186294,
+        "macdSignal": -53.414165760708684,
+        "rsi14": 37.959044087610565,
+        "bbUpper": 4068.931279473191,
+        "bbLower": 3851.8935252143087,
+        "proximityHi": -15.383978048469572,
+        "proximityLo": 1.8946853945595183,
+        "slope50": -5.258178147901328,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 0
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:XRPUSDT",
+      "features": {
+        "price": 2.7634804248809814,
+        "sma20": 2.803783452510834,
+        "sma50": 2.856739892959595,
+        "sma200": 2.944410183429718,
+        "macdLine": -0.03210003059149091,
+        "macdSignal": -0.029153675016664757,
+        "rsi14": 37.47592600001848,
+        "bbUpper": 2.8797856277557154,
+        "bbLower": 2.727781277265952,
+        "proximityHi": -11.74831854817096,
+        "proximityLo": 0.8214455953321202,
+        "slope50": -0.0012934518741481533,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 0
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:BNBUSDT",
+      "features": {
+        "price": 952.8418579101562,
+        "sma20": 976.5256103515625,
+        "sma50": 999.6238232421875,
+        "sma200": 1006.3940914916992,
+        "macdLine": -14.02327644910929,
+        "macdSignal": -11.78201096153484,
+        "rsi14": 30.7497009829534,
+        "bbUpper": 1010.887528533943,
+        "bbLower": 942.1636921691819,
+        "proximityHi": -11.51688440532911,
+        "proximityLo": 0.35105020978354795,
+        "slope50": -1.0216683606367438,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 0
+    },
+    {
+      "type": "stock",
+      "symbol": "SHOP",
+      "features": {
+        "price": 143.4499969482422,
+        "sma20": 146.10199966430665,
+        "sma50": 139.44719955444336,
+        "sma200": 114.4215497970581,
+        "macdLine": 3.0425682547005124,
+        "macdSignal": 3.526080385798592,
+        "rsi14": 48.276091648810045,
+        "bbUpper": 155.12307351160817,
+        "bbLower": 137.08092581700512,
+        "proximityHi": -8.700355520473115,
+        "proximityLo": 86.5652205578696,
+        "volSpike": 1.3962059842344068,
+        "slope50": 0.6422503493368112,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 40
+    },
+    {
+      "type": "stock",
+      "symbol": "XLK",
+      "features": {
+        "price": 278,
+        "sma20": 270.47149963378905,
+        "sma50": 265.8974005126953,
+        "sma200": 237.56660049438477,
+        "macdLine": 4.492849362038385,
+        "macdSignal": 3.686561983421967,
+        "rsi14": 64.51669514316865,
+        "bbUpper": 284.14932011938356,
+        "bbLower": 256.79367914819454,
+        "proximityHi": -1.6486250625256216,
+        "proximityLo": 54.67646281004365,
+        "volSpike": 1.1047912192166596,
+        "slope50": 0.31219393302745774,
+        "rs20": null
+      },
+      "fundamentals": {
+        "pe": null,
+        "roe": null,
+        "grossMargins": null,
+        "profitMargins": null,
+        "revenueGrowth": null
+      },
+      "preScore": 60
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:ADAUSDT",
+      "features": {
+        "price": 0.7745072245597839,
+        "sma20": 0.7813128739595413,
+        "sma50": 0.8011189758777618,
+        "sma200": 0.858917022049427,
+        "macdLine": -0.009116483468312286,
+        "macdSignal": -0.009366779449439854,
+        "rsi14": 41.15904481768701,
+        "bbUpper": 0.8012657058353908,
+        "bbLower": 0.7613600420836918,
+        "proximityHi": -17.40083660252036,
+        "proximityLo": 1.8280833085895811,
+        "slope50": -0.0008352326416048483,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 0
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:AVAXUSDT",
+      "features": {
+        "price": 28.998090744018555,
+        "sma20": 30.036187744140626,
+        "sma50": 32.21440368652344,
+        "sma200": 32.99809603691101,
+        "macdLine": -0.9254075635205474,
+        "macdSignal": -0.9271480280391848,
+        "rsi14": 26.521097675377376,
+        "bbUpper": 31.544484126285305,
+        "bbLower": 28.527891361995948,
+        "proximityHi": -18.37392565911681,
+        "proximityLo": 0,
+        "slope50": -0.10462556898875446,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 0
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:LINKUSDT",
+      "features": {
+        "price": 20.348648071289062,
+        "sma20": 20.675827026367188,
+        "sma50": 21.2461190032959,
+        "sma200": 22.613197746276857,
+        "macdLine": -0.28085306055887216,
+        "macdSignal": -0.276791840037232,
+        "rsi14": 37.99653196109609,
+        "bbUpper": 21.31626970664316,
+        "bbLower": 20.035384346091217,
+        "proximityHi": -17.802674372125978,
+        "proximityLo": 1.725118396647936,
+        "slope50": -0.02559982844610021,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 0
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:ATOMUSDT",
+      "features": {
+        "price": 4.0445098876953125,
+        "sma20": 4.053807818889618,
+        "sma50": 4.123394074440003,
+        "sma200": 4.350095046758652,
+        "macdLine": -0.025185897068418228,
+        "macdSignal": -0.028917895963504345,
+        "rsi14": 44.52325900070412,
+        "bbUpper": 4.113538802361406,
+        "bbLower": 3.99407683541783,
+        "proximityHi": -14.389438410916872,
+        "proximityLo": 1.8684046605359124,
+        "slope50": -0.0029035252841123774,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 0
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:MATICUSDT",
+      "error": "Error: HTTP 451 for https://api.binance.com/api/v3/klines?symbol=MATICUSDT&interval=1h&limit=300"
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:DOGEUSDT",
+      "features": {
+        "price": 0.2256246954202652,
+        "sma20": 0.22922270596027375,
+        "sma50": 0.23621202498674393,
+        "sma200": 0.25554972477257254,
+        "macdLine": -0.0034226224194265076,
+        "macdSignal": -0.0033915565767481896,
+        "rsi14": 36.45077199181409,
+        "bbUpper": 0.23653301198175747,
+        "bbLower": 0.22191239993879003,
+        "proximityHi": -21.18239394037824,
+        "proximityLo": 1.65732254299991,
+        "slope50": -0.0002558306654515151,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 0
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:APTUSDT",
+      "error": "Error: HTTP 451 for https://api.binance.com/api/v3/klines?symbol=APTUSDT&interval=1h&limit=300"
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:ARBUSDT",
+      "features": {
+        "price": 0.0011746755335479975,
+        "sma20": 0.0011746755335479975,
+        "sma50": 0.0011746755335479975,
+        "sma200": 0.0011746755335479975,
+        "macdLine": 0,
+        "macdSignal": 0,
+        "rsi14": 99.9999999,
+        "bbUpper": 0.0011746755335479975,
+        "bbLower": 0.0011746755335479975,
+        "proximityHi": 0,
+        "proximityLo": 0,
+        "slope50": 0,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 5
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:OPUSDT",
+      "features": {
+        "price": 0.6473434567451477,
+        "sma20": 0.6603666484355927,
+        "sma50": 0.6794372439384461,
+        "sma200": 0.7527358156442642,
+        "macdLine": -0.009769596373740641,
+        "macdSignal": -0.009222941786983328,
+        "rsi14": 35.551309272994686,
+        "bbUpper": 0.6824642933771871,
+        "bbLower": 0.6382690034939983,
+        "proximityHi": -23.617266743213825,
+        "proximityLo": 0.9420064636367456,
+        "slope50": -0.0009160314046134217,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 0
+    },
+    {
+      "type": "crypto",
+      "symbol": "BINANCE:LTCUSDT",
+      "features": {
+        "price": 103.24285125732422,
+        "sma20": 103.48355598449707,
+        "sma50": 105.20722839355469,
+        "sma200": 110.90119747161866,
+        "macdLine": -0.6471838657194269,
+        "macdSignal": -0.721926576529673,
+        "rsi14": 45.251930741427614,
+        "bbUpper": 105.13062610785445,
+        "bbLower": 101.83648586113969,
+        "proximityHi": -13.27890870304477,
+        "proximityLo": 2.0589250567660353,
+        "slope50": -0.0753543774264824,
+        "rs20": null
+      },
+      "fundamentals": null,
+      "preScore": 0
+    }
+  ]
+}
