@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <!-- fnothing · Web Push Test · OneSignal v16 -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>fnothing · Web Push Test</title>
+  <meta name="description" content="Diagnose & Abo-Flow für Web Push mit OneSignal v16.">
+  <meta name="theme-color" content="#0b0b0c">
+  <link rel="canonical" href="https://fnothing.com/push.html">
+  <script>
+    // www → non-www (OneSignal Domain muss exakt passen)
+    if (location.hostname.startsWith('www.')) {
+      location.replace(location.href.replace('//www.', '//'));
+    }
+  </script>
+
+  <!-- PWA (optional, für iOS-Hinweis) -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- Styles (Farben wie auf der Hauptseite) -->
+  <style>
+    :root{
+      --bg:#0b0b0c; --panel:#111114; --elev:#16161a; --text:#f4f4f5; --muted:#c4c4c7;
+      --line:#27272a; --brand:#7c5cff; --brand2:#00e0a4; --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35);
+      --w:min(980px,92vw);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#fff; --panel:#f6f7f9; --elev:#fff; --text:#111114; --muted:#444; --line:#e5e7eb; }
+    }
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; color:var(--text); background:
+        radial-gradient(900px 480px at 70% -10%, rgba(124,92,255,.16), transparent 60%),
+        radial-gradient(700px 360px at 10% -10%, rgba(0,224,164,.10), transparent 50%),
+        var(--bg);
+      font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;
+    }
+    .container{ width:var(--w); margin-inline:auto; padding:20px 0 }
+    header{
+      position:sticky; top:0; z-index:10; backdrop-filter:saturate(140%) blur(6px);
+      background:color-mix(in oklab, var(--bg) 86%, transparent); border-bottom:1px solid var(--line)
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:.8rem 0; gap:1rem; width:var(--w); margin-inline:auto }
+    .brand{ display:flex; align-items:center; gap:.7rem; font-weight:800; color:var(--text) }
+    .logo{ width:32px; height:32px }
+    .btn{
+      display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1rem; border-radius:12px; cursor:pointer;
+      border:1px solid var(--line); background:linear-gradient(180deg, var(--elev), var(--panel)); color:var(--text);
+    }
+    .btn-primary{ background:linear-gradient(180deg, var(--brand), #5a3dff); border-color:transparent; color:#fff; font-weight:700 }
+    .btn-outline{ background:transparent; border-color:var(--brand); color:var(--brand); font-weight:700 }
+    .grid{ display:grid; gap:1rem }
+    .card{
+      background:linear-gradient(180deg, var(--elev), var(--panel));
+      border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:1.1rem;
+    }
+    .muted{ color:var(--muted) }
+    .kicker{ letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; color:var(--muted) }
+    h1{ margin:.2rem 0 .6rem; font-size:clamp(1.6rem,4vw,2.2rem) }
+    pre{
+      margin:0; padding:12px; border-radius:12px; background:#0b0b0c; color:#f4f4f5; border:1px solid #232326;
+      white-space:pre-wrap; font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Monaco,"Roboto Mono",monospace;
+    }
+    .row{ display:flex; gap:.6rem; flex-wrap:wrap }
+    .pill{ display:inline-flex; gap:.4rem; align-items:center; padding:.3rem .6rem; border-radius:999px; border:1px solid var(--line); background:rgba(124,92,255,.10); font-size:.85rem }
+    footer{ border-top:1px solid var(--line); margin-top:2rem }
+    .foot{ width:var(--w); margin-inline:auto; padding:1rem 0; display:flex; align-items:center; justify-content:space-between; gap:1rem }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="nav">
+      <a class="brand" href="/" aria-label="Zur Startseite">
+        <svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+          <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#5a3dff"/></linearGradient></defs>
+          <rect rx="12" width="48" height="48" fill="url(#g)"/>
+          <path d="M13 30h11M24 30l11-14M13 23h8" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+        </svg>
+        <span>fnothing <span class="muted">Push · Test</span></span>
+      </a>
+      <a class="btn-outline btn" href="/">← Zurück</a>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <div class="container grid">
+    <div class="card">
+      <p class="kicker">Web Push · Diagnose</p>
+      <h1>Subscription testen & Status prüfen</h1>
+      <p class="muted">1) <b>Status</b> prüfen → 2) <b>Prompt anzeigen</b> → 3) ggf. <b>iOS-Hinweis</b> beachten (als PWA vom Homescreen öffnen).</p>
+
+      <div class="row" style="margin:.6rem 0 1rem">
+        <button id="btn-status" class="btn">Status aktualisieren</button>
+        <button id="btn-prompt" class="btn btn-primary">🔔 Prompt anzeigen</button>
+        <button id="btn-native" class="btn">Native Permission testen</button>
+        <button id="btn-local" class="btn">Lokale Test-Notification</button>
+        <button id="btn-reset" class="btn">SW/Cache Reset</button>
+      </div>
+
+      <div class="row" style="margin:.2rem 0 1rem">
+        <span class="pill">Support: <span id="p-supported" class="muted">–</span></span>
+        <span class="pill">Permission: <span id="p-perm" class="muted">–</span></span>
+        <span class="pill">Sub-ID: <span id="p-sub" class="muted">–</span></span>
+        <span class="pill">SW: <span id="p-sw" class="muted">–</span></span>
+      </div>
+
+      <pre id="out">Bereit…</pre>
+    </div>
+
+    <div class="card">
+      <b>Hinweise</b>
+      <ul class="muted" style="margin:.6rem 0 0 1rem">
+        <li>Windows/macOS: Browser-Prompt erscheint nur, wenn <em>nicht blockiert</em> wurde (Seiteneinstellungen prüfen).</li>
+        <li>iOS Safari: Seite <em>zum Home-Bildschirm</em> hinzufügen & von dort starten (PWA), dann erneut abonnieren.</li>
+        <li>Service Worker müssen im <em>Repo-Root</em> liegen:
+          <code>OneSignalSDKWorker.js</code> und <code>OneSignalSDKUpdaterWorker.js</code> (je 1 Zeile <code>importScripts(...)</code>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot">
+      <div class="muted">© <span id="year"></span> fnothing</div>
+      <a class="muted" href="https://fnothing.com/">fnothing.com</a>
+    </div>
+  </footer>
+
+  <!-- Script: Footer year -->
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <!-- OneSignal v16 SDK -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    const $ = s => document.querySelector(s);
+    const out = $("#out");
+    const pSupported = $("#p-supported");
+    const pPerm = $("#p-perm");
+    const pSub = $("#p-sub");
+    const pSW = $("#p-sw");
+    const log = (label, obj) => {
+      const line = typeof obj === "string" ? obj : JSON.stringify(obj, null, 2);
+      out.textContent += `\n[${label}] ${line}`;
+      out.scrollTop = out.scrollHeight;
+    };
+
+    // iOS Hinweis (falls nicht Standalone)
+    (function(){
+      const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      const standalone = navigator.standalone === true || matchMedia('(display-mode: standalone)').matches;
+      if (isIOS && !standalone) {
+        log("hint", "iOS: In Safari öffnen → Teilen → Zum Home-Bildschirm. Danach von dort starten, um Web Push zu erlauben.");
+      }
+    })();
+
+    // OneSignal init
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    window.OneSignalDeferred.push(async function(OneSignal) {
+      try {
+        await OneSignal.init({
+          appId: "9fe27bc6-4db2-4381-83ed-21e9fec4fec0",
+          serviceWorkerPath: "/OneSignalSDKWorker.js",
+          serviceWorkerUpdaterPath: "/OneSignalSDKUpdaterWorker.js",
+          serviceWorkerParam: { scope: "/" },
+          notifyButton: { enable: false }
+        });
+        log("init", "OneSignal initialisiert.");
+        await status("init");
+      } catch (e) {
+        log("init error", e.message || e);
+      }
+
+      // Status
+      async function status(label="status") {
+        try {
+          const supported = await OneSignal.Notifications.isPushSupported();
+          const perm = await OneSignal.Notifications.permission;    // "default" | "granted" | "denied"
+          const subId = await OneSignal.User.pushSubscriptionId;
+          const hasSW = 'serviceWorker' in navigator;
+          const regs = hasSW ? (await navigator.serviceWorker.getRegistrations()).map(r=>r.scope) : [];
+          pSupported.textContent = supported;
+          pPerm.textContent = perm;
+          pSub.textContent = subId || "–";
+          pSW.textContent = regs.length ? regs.join(", ") : "–";
+          log(label, { supported, permission: perm, subscriptionId: subId, serviceWorkers: regs });
+        } catch (e) {
+          log("status error", e.message || e);
+        }
+      }
+
+      // Prompt
+      $("#btn-prompt").addEventListener("click", async () => {
+        try{
+          const supported = await OneSignal.Notifications.isPushSupported();
+          if (!supported) {
+            alert("Push wird hier nicht unterstützt (z. B. iOS im Browser-Tab). Bitte als PWA vom Homescreen starten.");
+            return;
+          }
+          if (OneSignal.Slidedown?.promptPush) {
+            await OneSignal.Slidedown.promptPush();
+          } else {
+            await OneSignal.Notifications.requestPermission();
+          }
+          await OneSignal.User.addTag("signals","true");
+          log("prompt", "Prompt gezeigt, Tag gesetzt (signals=true).");
+        } catch (e) {
+          log("prompt error", e.message || e);
+        }
+        await status("after prompt");
+      });
+
+      // Native Permission
+      $("#btn-native").addEventListener("click", async () => {
+        try{
+          const res = await Notification.requestPermission();
+          log("native", "Notification.permission = " + res);
+        } catch(e) {
+          log("native error", e.message || e);
+        }
+        await status("after native");
+      });
+
+      // Lokale Test-Notification (zeigt nur, ob SW/Notifications funktionieren – kein Push von OneSignal)
+      $("#btn-local").addEventListener("click", async () => {
+        try{
+          if (!("serviceWorker" in navigator)) { alert("Kein ServiceWorker verfügbar."); return; }
+          const reg = (await navigator.serviceWorker.getRegistration()) || (await navigator.serviceWorker.ready);
+          if (!reg) { alert("Kein aktiver ServiceWorker gefunden."); return; }
+          await reg.showNotification("fnothing · Lokaler Test", {
+            body: "Wenn du das siehst, sind SW & Notifications OK.",
+            icon: "/icon-192.png",
+            badge: "/icon-192.png",
+            data: { url: "https://fnothing.com/" }
+          });
+          log("local", "Lokale Notification ausgelöst.");
+        } catch(e){
+          log("local error", e.message || e);
+        }
+      });
+
+      // Status
+      $("#btn-status").addEventListener("click", () => status("manual"));
+
+      // Reset
+      $("#btn-reset").addEventListener("click", async () => {
+        try {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          for (const r of regs) await r.unregister();
+          if (window.caches) { const keys = await caches.keys(); for (const k of keys) await caches.delete(k); }
+          localStorage.clear(); sessionStorage.clear();
+          log("reset", "SW/Cache/Storage zurückgesetzt. Seite neu laden & erneut testen.");
+          alert("Zurückgesetzt. Seite neu laden & erneut testen.");
+        } catch (e) {
+          log("reset error", e.message || e);
+        }
+        await status("after reset");
+      });
+    });
+  </script>
+</body>
+</html>
